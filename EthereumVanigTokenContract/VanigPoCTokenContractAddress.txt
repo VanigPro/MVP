@@ -1,27 +1,27 @@
 truffle migrate --network rinkeby
 
+Writing artifacts to ./build/contracts
+
 Using network 'rinkeby'.
 
 Running migration: 1_initial_migration.js
-
   Deploying Migrations...
-  ... 0xe6530288eaf5fba5a96ae11572ead668fe3471fbf2d5d92066b103c756b12704
-
-  Migrations: 0xb68a01e6b7cc67758658332436c62d336a60917f
+  ... 0x39fc5a438518e03393f2ad38209e459dae368035759dde2659f04e61bc5e9298
+  Migrations: 0x7d3e29f96e8540c1d76ef13d4e204d444753805e
 Saving successful migration to network...
-  ... 0xc6ea50e9c77b8014b12fb694c11b74463bd57f15fcf17bace53ce62df248c309
+  ... 0xa4ebf97e8b3beb073287dcb345ade2a4158f79cca1ef6ae903dd1bacc7b6f8d0
 Saving artifacts...
 Running migration: 2_deploy_contracts.js
   Deploying PoCToken...
-  ... 0x5ac55cbf63715e259bba5be22f46570a0137fda74ae43cb4b0921bea131ba0bb
-  PoCToken: 0x2d50b08064ed495d53cbdefcc102ddff9620adf7
+  ... 0xc9e663fe8c57c6bb64c9c365d28ce36e9705bd42b08a2047fca6e3e7e170dd68
+  PoCToken: 0x12634af794d622653c037c890badb697c25c70c1
   Deploying Payment...
-  ... 0x6fccc3febcffcd12424c5366a05201b6ac85ce32a0eb7286be23b8f2e5826878
-  Payment: 0xc7aaf2027b381b2c422788f03061445eaf3b4959
+  ... 0xfa10a023c33dbd25910ec0df8ef4fd0252a3bf3ec0ed3d674fde3fe702ffa008
+  Payment: 0x7bd42e63d8a041d7e4ff1cb219a6ce9a2345708f
 Saving successful migration to network...
-  ... 0x52b0262d4e72814a13265569eedc800554feec12762de1f145b3d68ac78ff685
+  ... 0xbc980e00a9ebfb0b8ee9d1ecc7b23df396237860a6b073c5e209c91b479f5528
+
+
 Saving artifacts...
 
-
-
-https://rinkeby.etherscan.io/token/0x2d50b08064ed495d53cbdefcc102ddff9620adf7
+https://rinkeby.etherscan.io/token/0x12634af794d622653c037c890badb697c25c70c1
