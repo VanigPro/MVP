@@ -1,0 +1,6 @@
+# Set the default behavior, in case people don't have core.autocrlf set.
+*.sh        eol=lf
+*.js        eol=lf
+*.html      eol=lf
+*.css       eol=lf
+* text=auto
