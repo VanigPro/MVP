@@ -1,0 +1,27 @@
+truffle migrate --network rinkeby
+
+Using network 'rinkeby'.
+
+Running migration: 1_initial_migration.js
+
+  Deploying Migrations...
+  ... 0xe6530288eaf5fba5a96ae11572ead668fe3471fbf2d5d92066b103c756b12704
+
+  Migrations: 0xb68a01e6b7cc67758658332436c62d336a60917f
+Saving successful migration to network...
+  ... 0xc6ea50e9c77b8014b12fb694c11b74463bd57f15fcf17bace53ce62df248c309
+Saving artifacts...
+Running migration: 2_deploy_contracts.js
+  Deploying PoCToken...
+  ... 0x5ac55cbf63715e259bba5be22f46570a0137fda74ae43cb4b0921bea131ba0bb
+  PoCToken: 0x2d50b08064ed495d53cbdefcc102ddff9620adf7
+  Deploying Payment...
+  ... 0x6fccc3febcffcd12424c5366a05201b6ac85ce32a0eb7286be23b8f2e5826878
+  Payment: 0xc7aaf2027b381b2c422788f03061445eaf3b4959
+Saving successful migration to network...
+  ... 0x52b0262d4e72814a13265569eedc800554feec12762de1f145b3d68ac78ff685
+Saving artifacts...
+
+
+
+https://rinkeby.etherscan.io/token/0x2d50b08064ed495d53cbdefcc102ddff9620adf7
