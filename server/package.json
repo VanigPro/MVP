@@ -1,0 +1,35 @@
+{
+  "name": "vanig-transaction-processor",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Transaction API for the blockchain browser UI",
+  "main": "index.js",
+  "engines": {
+    "node": "8.9.x",
+    "npm": "5.6.x"
+  },
+  "scripts": {
+    "start": "node .",
+    "vendor": "nodemon -r dotenv/config . dotenv_config_path=./.env.vendor",
+    "customer": "nodemon -r dotenv/config . dotenv_config_path=./.env.customer ",
+    "inspect": "node --inspect ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VanigPro/MVP.git"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "cbor": "^3.0.0",
+    "cors": "^2.8.4",
+    "dotenv": "^4.0.0",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "request": "^2.83.0",
+    "sawtooth-sdk": "^1.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.14.11",
+    "prettier": "1.10.2"
+  }
+}
