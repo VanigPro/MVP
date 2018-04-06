@@ -12,7 +12,7 @@ const WEBSOCKET_URL =
 const ONE_ITEM_TOKEN_CHARGE = process.env.ONE_ITEM_TOKEN_CHARGE || 100;
 
 /* This is used for API call on Ethereum network. */
-const ETHEREUM_API_KEY = process.env.ETHEREUM_API_KEY || 'E API KEY';
+const ETHEREUM_API_KEY = process.env.ETHEREUM_API_KEY || 'YRZIYVV8F4CKV92EPMJQZA4NPUGQUFIYZ7';
 
 const FAMILY_VENDOR = process.env.FAMILY || 'Vanig-Vendor';
 const FAMILY_CUSTOMER = process.env.FAMILY_CUSTOMER || 'Vanig-Customer';
