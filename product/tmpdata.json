@@ -1,0 +1,30 @@
+[
+	{
+	  "SKU": "SKMWDF123",
+	  "ItemNo": "ITM001",
+	  "Description": "Vanig Logo Printed T-Shirt",
+	  "Color": "White",
+	  "Size": "Large",
+	  "Price": "40",
+	  "Manufacturer": "Niky",
+	  "MfgDate": "02/28/2018",
+	  "MfgLocation": "USA",
+	  "ExpiryDate": "NA",
+	  "CurrentLocation": "Columbus, USA",
+	  "MadeOf": "100% Cotton"
+	},
+	{
+	  "SKU": "SKGWDF456",
+	  "ItemNo": "ITM002",
+	  "Description": "Vanig Logo Jeanes",
+	  "Color": "Blue",
+	  "Size": "Medium",
+	  "Price": "50",
+	  "Manufacturer": "Denim",
+	  "MfgDate": "03/02/2018",
+	  "MfgLocation": "Canada",
+	  "ExpiryDate": "NA",
+	  "CurrentLocation": "PA, USA",
+	  "MadeOf": "100% Cotton"
+	}
+]

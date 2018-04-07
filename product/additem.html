@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Add Item</title>
+<script src="js/jquery-1.11.1.js"></script>
+<script src="js/jquery.validate.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+
+<ul class="menu">
+  <li><a href="index.html">Item List</a></li>
+  <li><a class="active"  href="additem.html">Add Item</a></li>
+</ul>
+<div style="margin-left:20%;padding:1px 16px;height:1000px;">
+
+	<form name="additem" id="frmadditem" method="post" action="test_post.php">
+	<ul class="frmcls">
+		<li><label>Item <span class="required">*</span></label>
+			<input type="text" name="SKU" id="SKU" class="field-divided" placeholder="SKU" />
+			<input type="text" name="ItemNo" id="ItemNo" class="field-divided" placeholder="Item Number" />
+		</li>
+		<li>
+			<label>Item Description <span class="required">*</span></label>
+			<input type="text" name="Description" id="Description" class="field-long" />
+		</li>
+		<li>
+			<label>Color</label>
+			<select name="Color" id="Color" class="field-select">
+			<option value="White">White</option>
+			<option value="Red">Red</option>
+			<option value="Blue">Blue</option>
+			<option value="Yellow">Yellow</option>
+			<option value="Green">Green</option>
+			<option value="Pink">Pink</option>
+			<option value="Purple">Purple</option>
+			<option value="Orange">Orange</option>
+			<option value="Brown">Brown</option>
+			<option value="Gray">Gray</option>
+			</select>
+		</li>
+		<li>
+			<label>Size</label>
+			<select name="Size" id="Size" class="field-select">
+				<option value="Large">Large</option>
+				<option value="Medium">Medium</option>
+				<option value="Small">Small</option>
+			</select>
+		</li>
+		<li>
+			<label>Price (VANIG Tokens)<span class="required">*</span></label>
+			<input type="text" id="Price" name="Price" class="field-long"  />
+		</li>
+		<li>
+			<label>Manufacturer Name<span class="required">*</span></label>
+			<input type="text" id="Manufacturer" name="Manufacturer" class="field-long" />
+		</li>
+		<li>
+			<label>Manufactured Info </label>
+			<input type="text" id="MfgDate" name="MfgDate" class="field-divided" placeholder="Manufactured Date" />
+			<input type="text" id="MfgLocation" name="MfgLocation" class="field-divided" placeholder="Manufactured Location" />
+		</li>
+		<li>
+			<label>Expiry Date</label>
+			<input type="text" id="ExpiryDate" name="ExpiryDate" class="field-long" />
+		</li>
+		<li>
+			<label>Current Location</label>
+			<input type="text" id="CurrentLocation" name="CurrentLocation" class="field-long" />
+		</li>
+		<li>
+			<label>Made of</label>
+			<input type="text" id="MadeOf" name="MadeOf" class="field-long" />
+		</li>
+		<li>
+			<input type="submit" id="frmSubmit" value="Submit" /> <span id="frmMsg"></span>
+		</li>
+	</ul>
+	</form>
+</div>
+<script src="js/additem.js"></script>
+
+</body>
+</html>

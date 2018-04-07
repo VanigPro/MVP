@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>List Items</title>
+<script src="js/jquery-1.11.1.js"></script>
+<script src="js/jquery.validate.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+<ul class="menu">
+  <li><a class="active" href="index.html">List Items</a></li>
+  <li><a href="additem.html">Add Item</a></li>
+</ul>
+<div style="margin-left:20%;padding:1px 16px;height:1000px;">
+
+<div id="showData">
+	Getting data through AJAX
+</div>
+
+</div>
+
+<script>
+$(function() {
+	 $.ajax({ 
+		type: 'GET', 
+		url: 'tmpdata.json', 
+		data: { get_param: 'value' }, 
+		dataType: 'json',
+		success: function (data) { 
+			var col = [];
+			for (var i = 0; i < data.length; i++) {
+				for (var key in data[i]) {
+					if (col.indexOf(key) === -1) {
+						col.push(key);
+					}
+				}
+			}
+
+			// CREATE DYNAMIC TABLE.
+			var table = document.createElement("table");
+
+			// CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
+
+			var tr = table.insertRow(-1);                   // TABLE ROW.
+
+			for (var i = 0; i < col.length; i++) {
+				var th = document.createElement("th");      // TABLE HEADER.
+				th.innerHTML = col[i];
+				tr.appendChild(th);
+			}
+
+			// ADD JSON DATA TO THE TABLE AS ROWS.
+			for (var i = 0; i < data.length; i++) {
+
+				tr = table.insertRow(-1);
+
+				for (var j = 0; j < col.length; j++) {
+					var tabCell = tr.insertCell(-1);
+					tabCell.innerHTML = data[i][col[j]];
+				}
+			}
+
+			// FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
+			var divContainer = document.getElementById("showData");
+			divContainer.innerHTML = "";
+			divContainer.appendChild(table);
+		
+			/*$.each(data, function(index, element) {
+				$('body').append($('<div>', {
+					text: element.SKU
+				}));
+			});*/
+		}
+	});
+});
+</script>
+
+</body>
+</html>
