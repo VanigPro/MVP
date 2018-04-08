@@ -25,7 +25,8 @@ const toInternalError = err => {
 };
 
 router.use(bodyParser.urlencoded({ extended: true }));
-app.use('/', express.static(path.join(__dirname, '../Web')));
+app.use('/', express.static(path.join(__dirname, '../vendorWeb')));
+app.use('/product', express.static(path.join(__dirname, '../product')));
 
 router.get('/server_time', function(req, res) {
   const currentDate = new Date();
@@ -41,6 +42,7 @@ router.get('/get_portal', function(req, res) {
     error: null,
     body: { portal: process.env.PORTAL_USED_AS, family: process.env.FAMILY }
   };
+  console.log(resObj);
   res.status(200).send(resObj);
 });
 
