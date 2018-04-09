@@ -266,6 +266,9 @@ const addNewItemDiv = (parent, asset) => {
 			<label>Made of</label>\
 			<input type="text" id="MadeOf" name="MadeOf" class="field-long" />\
 		</li>\
+    <li>\
+			<input type="button" id="frmSubmit" value="Submit" /><span id="frmMsg"></span>\
+		</li>\
 	</ul>\
   <form>';
   $(parent).html(html);
