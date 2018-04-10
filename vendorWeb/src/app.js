@@ -228,44 +228,31 @@ const changeLoginStatus = isLoggedIn => {
     addUserNameAndImage();
     addEditIconForMobile();
 
-    var items = [
-      {
-        SKU: 'SKMWDF123',
-        ItemNo: 'ITM001',
-        Description: 'Vanig Logo Printed T-Shirt',
-        Color: 'White',
-        Size: 'Large',
-        Price: '40',
-        Manufacturer: 'Niky',
-        MfgDate: '02/28/2018',
-        MfgLocation: 'USA',
-        ExpiryDate: 'NA',
-        CurrentLocation: 'Columbus, USA',
-        MadeOf: '100% Cotton'
+    let items = new Array();
+
+    let userAddr = '';
+    let tabname = 'listeditems';
+    userAddr = '7d7f7702';//tabAddressGenerate[tabname](PREFIX, app.user.public,'');
+    getValidatorState(
+      ({ tabData }) => {
+        console.log(tabData);
+
+        if (tabData.length) {
+          tabData.forEach(payloadObj => {
+            items.push(JSON.parse(payloadObj.asset));
+          });
+
+          app.Items = items;
+          //console.log(items);
+          getListedItemsHtml('#items-listed', app.Items);
+        }
       },
-      {
-        SKU: 'SKGWDF456',
-        ItemNo: 'ITM002',
-        Description: 'Vanig Logo Jeanes',
-        Color: 'Blue',
-        Size: 'Medium',
-        Price: '50',
-        Manufacturer: 'Denim',
-        MfgDate: '03/02/2018',
-        MfgLocation: 'Canada',
-        ExpiryDate: 'NA',
-        CurrentLocation: 'PA, USA',
-        MadeOf: '100% Cotton'
-      }
-    ];
-
-    app.Items = items;
-
-    getListedItemsHtml('#items-listed', app.Items);
+      userAddr,
+      tabname
+    );
 
     addNewItemDiv('#add-new-item', app.newItemm);
 
-    //  addNewItemDiv('#add-new-item', app.newItemm);
   }
 };
 
