@@ -56,44 +56,51 @@ const app = {
   vendorListItems: ''
 };
 
-$(document).on('click', '#frmSubmit', function() {
-  var formData = {};
-		$.each($("#frmadditem").serializeArray(), function(i, pair){
-			var cObj = formData, pObj, cpName;
-			$.each(pair.name.split("."), function(i, pName){
-				pObj = cObj;
-				cpName = pName;
-				cObj = cObj[pName] ? cObj[pName] : (cObj[pName] = {});
-			});
-			pObj[cpName] = pair.value;
-		});
-		formData = JSON.stringify(formData);
-    //alert(formData);
+ jQuery(document.body).on('click', '#submitBtn', function(){
+		jQuery("form[name=additem]").validate({
+ 			rules: {
+ 				SKU: "required",
+ 				ItemNo: "required",
+ 				Description: "required",
+ 				Price: "required",
+ 				Manufacturer: "required"
+ 			},
+ 			messages: {
+ 				SKU: "Please enter SKU",
+ 				ItemNo: "Please enter Item Number",
+ 				Description: "Please enter Description",
+ 				Price: "Please enter Price",
+ 				Manufacturer: "Please enter Manufacturer name"
+ 			}
+ 		});
+    if(jQuery("form[name=additem]").valid())
+    {
+      var formData = {};
+      $.each($('#frmadditem').serializeArray(), function(i, pair) {
+        var cObj = formData,
+        pObj,
+        cpName;
+        $.each(pair.name.split('.'), function(i, pName) {
+          pObj = cObj;
+          cpName = pName;
+          cObj = cObj[pName] ? cObj[pName] : (cObj[pName] = {});
+        });
+        pObj[cpName] = pair.value;
+      });
+      let $this = $(this);
+      let requestFor = 'listedItems';
+      //addLoader($this);
+      console.log('submit clicked');
 
-    //app.update($("#frmadditem").serializeArray(), '');
-    app.update(formData, 'tabs');
+      if (calculatePayLoad[requestFor]) {
+        const payLoadObj = calculatePayLoad[requestFor](formData, app);
+        console.log(payLoadObj);
+        app.update([payLoadObj], 'tabs', $this);
+      }
+    }
 
-    //const payLoadObj = calculatePayLoad('payment')(formData);
-    //app.update([payLoadObj], 'payment');
-
-    /*$.ajax({
-			url: 'test_post.php', // url where to submit the request
-			type : "POST",
-			dataType : 'json',
-			contentType : "application/json",
-			data : formData,
-			success : function(result) {
-				$("#frmMsg").html("Data has been saved successfully.");
-				$( "#frmMsg").removeClass( "error").addClass("success");
-				//console.log(result);
-			},
-			error: function(xhr, resp, text) {
-				$("#frmMsg").html("There is some error while procesing your request.");
-				$( "#frmMsg" ).removeClass( "success").addClass("error");
-				//console.log(xhr, resp, text);
-			}
-		})*/
 });
+
 
 $(document).on('click', '#next', function() {
   var newTab = $('#' + app.currentTab).next('.tab-div');

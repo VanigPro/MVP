@@ -210,10 +210,12 @@ const addNewItemDiv = (parent, asset) => {
   var html =
     '	<form name="additem" id="frmadditem" >\
     	<ul class="frmcls">\
-<li><label>Item <span class="required">*</span></label>\
-			<input type="text" name="SKU" id="SKU" class="field-divided" placeholder="SKU" />\
-			<input type="text" name="ItemNo" id="ItemNo" class="field-divided" placeholder="Item Number" />\
+      <li><label>SKU <span class="required">*</span></label>\
+			<input type="text" name="SKU" id="SKU" class="field-divided"/>\
 		</li>\
+    <li><label>Item Number <span class="required">*</span></label>\
+    <input type="text" name="ItemNo" id="ItemNo" class="field-divided"/>\
+  </li>\
 		<li>\
 			<label>Item Description <span class="required">*</span></label>\
 			<input type="text" name="Description" id="Description" class="field-long" />\
@@ -250,9 +252,12 @@ const addNewItemDiv = (parent, asset) => {
 			<input type="text" id="Manufacturer" name="Manufacturer" class="field-long" />\
 		</li>\
 		<li>\
-			<label>Manufactured Info </label>\
-			<input type="text" id="MfgDate" name="MfgDate" class="field-divided" placeholder="Manufactured Date" />\
-			<input type="text" id="MfgLocation" name="MfgLocation" class="field-divided" placeholder="Manufactured Location" />\
+			<label>Manufactured Date</label>\
+			<input type="text" id="MfgDate" name="MfgDate" class="field-divided" />\
+		</li>\
+    <li>\
+			<label>Manufactured Location</label>\
+			<input type="text" id="MfgLocation" name="MfgLocation" class="field-divided"  />\
 		</li>\
 		<li>\
 			<label>Expiry Date</label>\
@@ -267,7 +272,7 @@ const addNewItemDiv = (parent, asset) => {
 			<input type="text" id="MadeOf" name="MadeOf" class="field-long" />\
 		</li>\
     <li>\
-			<input type="button" id="frmSubmit" value="Submit" /><span id="frmMsg"></span>\
+			<input type="button" id="submitBtn" value="Submit" /> <span id="frmMsg"></span>\
 		</li>\
 	</ul>\
   <form>';

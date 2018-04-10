@@ -70,12 +70,14 @@ router.post('/get_validator_state', function(req, res) {
 
 router.post('/validator_batch_submit', function(req, res) {
   try {
+    console.log(req.body);
     const body = req.body;
     const payLoadArr = body.payloadArr;
     payLoadArr.forEach(payloadObj => {
       payloadObj.time = new Date().getTime();
     });
     const batchBytes = getBatchBytes(payLoadArr, body.privateKey);
+    console.log('submit batch bytes...');
     request.post(
       {
         uri: `${API_URL}/batches?wait`,

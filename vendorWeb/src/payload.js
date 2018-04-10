@@ -82,6 +82,9 @@ const calculatePayLoad = {
       receiver: '0x1'
     };
     return getPayLoadObj('create', asset, app, 'payment');
+  },
+  listedItems: (asset, app) => {
+    return getPayLoadObj('create', asset, app, 'listedItems');
   }
 };
 

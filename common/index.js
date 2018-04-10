@@ -2,7 +2,7 @@
 
 const { createHash } = require('crypto');
 
-const secp256k1 = require('./../Web/node_modules/secp256k1');
+const secp256k1 = require('./../server/node_modules/secp256k1');
 const _decodeBuffer = (buffer, format) => {
   if (buffer instanceof Buffer) return buffer;
   return Buffer.from(buffer, format);

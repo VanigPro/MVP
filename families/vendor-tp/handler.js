@@ -26,6 +26,7 @@ const toInternalError = err => {
 
 const createAsset = (txnModel, state) => {
   if (!txnModel.isValid()) {
+    console.log('txn model invalid')
     return Promise.resolve().then(() => {
       throw new InvalidTransaction(txnModel.errors[0]);
     });
@@ -60,10 +61,11 @@ const createAsset = (txnModel, state) => {
     } else {
       if (entry && entry.length > 0) {
         if (tabAddressGenerate[isMessage]) {
+          let assetjson = JSON.parse(asset);
           const assetAddress = tabAddressGenerate[isMessage](
             PREFIX,
             owner,
-            bothUserKeys
+            assetjson.SKU
           );
           return state.setState({
             [assetAddress]: encode({ asset, owner, isMessage, time })

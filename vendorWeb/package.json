@@ -29,6 +29,7 @@
     "jquery": "^3.2.1",
     "jquery-confirm": "^3.3.2",
     "jquery-steps": "^1.1.0",
+    "jquery-validation": "^1.17.0",
     "jquery.cookie": "^1.4.1",
     "mnid": "^0.1.1",
     "request": "^2.83.0",
