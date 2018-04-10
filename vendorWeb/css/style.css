@@ -56,6 +56,7 @@ button {
   letter-spacing: 1px;
   padding: 0 30px;
   text-transform: uppercase;
+  visibility: hidden;
 }
 
 button:hover {
