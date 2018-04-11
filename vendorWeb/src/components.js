@@ -90,6 +90,68 @@ const addEditIconForMobile = () => {
   $('.tab-content').append(html);
 };
 
+const getAppendItemsHtml = (parent, item) => {
+  //search and remove row with same SKU
+  var input, filter, table, tr, td, i;
+  filter = item.SKU.toUpperCase();;
+  table = document.getElementById("showData");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      if (td.innerHTML.toUpperCase() == filter) {
+        tr[i].style.display = "none";
+      } else {
+        tr[i].style.display = "";
+      }
+    }
+  }
+
+
+var htmlTableData = '';
+  htmlTableData = '<tr>\
+<td>';
+
+  htmlTableData += item.SKU;
+  htmlTableData += '</td>\
+<td>';
+  htmlTableData += item.ItemNo;
+  htmlTableData += '</td>\
+<td>';
+  htmlTableData += item.Description;
+  htmlTableData += '</td>\
+<td>';
+  htmlTableData += item.Color;
+  htmlTableData += '</td>\
+<td>';
+  htmlTableData += item.Size;
+  htmlTableData += '</td>\
+<td>';
+  htmlTableData += item.Price;
+  htmlTableData += '</td>\
+<td>';
+  htmlTableData += item.Manufacturer;
+  htmlTableData += '</td>\
+<td>';
+  htmlTableData += item.MfgDate;
+  htmlTableData += '</td>\
+<td>';
+  htmlTableData += item.MfgLocation;
+  htmlTableData += '</td>\
+<td>';
+  htmlTableData += item.ExpiryDate;
+  htmlTableData += '</td>\
+<td>';
+  htmlTableData += item.CurrentLocation;
+  htmlTableData += '</td>\
+<td>';
+  htmlTableData += item.MadeOf;
+  htmlTableData += '</td>\
+</tr>';
+
+  $('#showData tbody').append(htmlTableData);
+
+}
 const getListedItemsHtml = (parent, asset) => {
   var html =
     '<div id="showData">\
@@ -138,43 +200,43 @@ const getListedItemsHtml = (parent, asset) => {
   console.log(asset);
   asset.forEach(item => {
     htmlTableData += '<tr>\
-<th>';
+<td>';
 
     htmlTableData += item.SKU;
-    htmlTableData += '</th>\
-<th>';
+    htmlTableData += '</td>\
+<td>';
     htmlTableData += item.ItemNo;
-    htmlTableData += '</th>\
-<th>';
+    htmlTableData += '</td>\
+<td>';
     htmlTableData += item.Description;
-    htmlTableData += '</th>\
-<th>';
+    htmlTableData += '</td>\
+<td>';
     htmlTableData += item.Color;
-    htmlTableData += '</th>\
-<th>';
+    htmlTableData += '</td>\
+<td>';
     htmlTableData += item.Size;
-    htmlTableData += '</th>\
-<th>';
+    htmlTableData += '</td>\
+<td>';
     htmlTableData += item.Price;
-    htmlTableData += '</th>\
-<th>';
+    htmlTableData += '</td>\
+<td>';
     htmlTableData += item.Manufacturer;
-    htmlTableData += '</th>\
-<th>';
+    htmlTableData += '</td>\
+<td>';
     htmlTableData += item.MfgDate;
-    htmlTableData += '</th>\
-<th>';
+    htmlTableData += '</td>\
+<td>';
     htmlTableData += item.MfgLocation;
-    htmlTableData += '</th>\
-<th>';
+    htmlTableData += '</td>\
+<td>';
     htmlTableData += item.ExpiryDate;
-    htmlTableData += '</th>\
-<th>';
+    htmlTableData += '</td>\
+<td>';
     htmlTableData += item.CurrentLocation;
-    htmlTableData += '</th>\
-<th>';
+    htmlTableData += '</td>\
+<td>';
     htmlTableData += item.MadeOf;
-    htmlTableData += '</th>\
+    htmlTableData += '</td>\
 </tr>';
   });
   $(parent).html(html + htmlTableData);
@@ -277,6 +339,9 @@ const addNewItemDiv = (parent, asset) => {
 	</ul>\
   <form>';
   $(parent).html(html);
+  $('#home-tabs')
+    .find("[data-toggle='items-listed']")
+    .trigger('click');
 };
 
 module.exports = {
@@ -287,5 +352,6 @@ module.exports = {
   addUserHeaderDiv,
   addEditIconForMobile,
   getListedItemsHtml,
+  getAppendItemsHtml,
   addNewItemDiv
 };

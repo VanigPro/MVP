@@ -24,6 +24,7 @@ const {
   addUserHeaderDiv,
   addEditIconForMobile,
   getListedItemsHtml,
+  getAppendItemsHtml,
   addNewItemDiv
 } = require('./components');
 
@@ -95,7 +96,7 @@ const app = {
       if (calculatePayLoad[requestFor]) {
         const payLoadObj = calculatePayLoad[requestFor](formData, app);
         console.log(payLoadObj);
-        app.update([payLoadObj], 'tabs', $this);
+        app.update([payLoadObj], 'tabs-all', $this);
       }
     }
 
@@ -265,7 +266,7 @@ console.log(parsed);
     case 'listedItems':
       asset = payLoadDecrypt(msgDecryptKey, app.user.private, parsed.asset);
       if (asset) {
-        getListedItemsHtml,('#items-listed', asset);
+        getAppendItemsHtml('#items-listed', asset);
         app.test = asset;
       }
       break;
@@ -369,7 +370,7 @@ console.log('web socket received ',allStateData);
     allStateData.forEach(data => {
       if (data.value) {
         const parsed = JSON.parse(atob(data.value));
-console.log(parsed);
+
         if (parsed.owner === app.user.public) {
           constructTabhtml(parsed);
         }
