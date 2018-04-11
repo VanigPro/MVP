@@ -75,7 +75,7 @@ const addUserHeaderDiv = (imageurl, name) => {
     name +
     '</h1>\n\
   </div>\n\
-  <a href="javascript:void(0);"><button class="add-new-item" class="right">Add new Item</button></a>\n\
+  <!-- <a href="javascript:void(0);"><button class="add-new-item" class="right">Add new Item</button></a> --> \n\
   </div>\n\
   </section>';
 
