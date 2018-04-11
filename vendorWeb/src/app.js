@@ -417,7 +417,7 @@ const submitPaymentToHyperLedger = (amount, senderAddr) => {
   app.update([payLoadObj], 'payment');
 };
 
-const uport = new Connect('AMCHART-DEV', {
+const uport = new Connect('Vanig', {
   clientId: '2odgjwjGBwB92GfBB38d378wg2fNiLe1A3P',
   network: 'rinkeby',
   signer: SimpleSigner(
