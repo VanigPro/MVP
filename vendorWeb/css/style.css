@@ -57,7 +57,9 @@ button {
   padding: 0 30px;
   text-transform: uppercase;
 }
-
+buttonAddNew {
+  visibility: hidden;
+}
 button:hover {
   color: #333;
   background-color: #e6e6e6;

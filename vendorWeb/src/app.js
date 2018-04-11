@@ -260,11 +260,12 @@ const constructTabhtml = (parsed, fromStart) => {
   console.log(parsed);
   var asset;
   let msgDecryptKey = parsed.msgDecryptKey || app.user.public;
+console.log(parsed);
   switch (parsed.isMessage) {
-    case 'test':
+    case 'listedItems':
       asset = payLoadDecrypt(msgDecryptKey, app.user.private, parsed.asset);
       if (asset) {
-        getTestHtml('#test-final', asset);
+        getListedItemsHtml,('#items-listed', asset);
         app.test = asset;
       }
       break;
@@ -361,12 +362,14 @@ $(document).on('click', '#logout', function() {
 });
 
 const handleWebsocketResponse = allStateData => {
-  if (app.state === 'edit') {
-    console.log('user is in edit mode');
-  } else {
+console.log('web socket received ',allStateData);
+//  if (app.state === 'edit') {
+   // console.log('user is in edit mode');
+ // } else {
     allStateData.forEach(data => {
       if (data.value) {
         const parsed = JSON.parse(atob(data.value));
+console.log(parsed);
         if (parsed.owner === app.user.public) {
           constructTabhtml(parsed);
         }
@@ -374,7 +377,7 @@ const handleWebsocketResponse = allStateData => {
         console.log(data);
       }
     });
-  }
+ // }
 };
 
 app.user = { public: '' };
@@ -414,7 +417,7 @@ const submitPaymentToHyperLedger = (amount, senderAddr) => {
   app.update([payLoadObj], 'payment');
 };
 
-const uport = new Connect('AMCHART-DEV', {
+const uport = new Connect('Vanig', {
   clientId: '2odgjwjGBwB92GfBB38d378wg2fNiLe1A3P',
   network: 'rinkeby',
   signer: SimpleSigner(
