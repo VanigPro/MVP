@@ -98,11 +98,16 @@ const getListedItemsHtml = (parent, asset) => {
 
   var htmlTableData = '';
   //console.log(asset);
-
+  var i = 3;
   asset.forEach(item => {
+
+    i++;
+    if(i > 9){
+      i = 1;
+    }
     productlist += '<div class="row-fluid">';
       productlist += '<div class="span2">';
-        productlist += '<img src="images/dummy_product.jpg" alt="">';
+        productlist += '<img src="images/demo_img/SKUIMG00' + i +'.jpg" alt="">';
       productlist += '</div>';
 
       productlist += '<div class="span6">';
@@ -122,9 +127,12 @@ const getListedItemsHtml = (parent, asset) => {
 		productlist += '<div class="span4 alignR">';
 			productlist += '<form class="form-horizontal qtyFrm">';
 				productlist += '<h3> <span class="attr">VANIG tokens</span> ' + item.Price + '</h3>';
-				productlist += item.Manufacturer + '<br>';//'('+ item.MfgDate +')
-				productlist += '<div class="btn-group">';
-				  productlist += '<a href="#" class="defaultBtn"><span class=" icon-shopping-cart"></span> Add to cart</a>';
+				productlist += '<span class="attr">Mfd. by</span> '+ item.Manufacturer + ' <br>';
+        if(item.MfgDate.trim() != ''){
+          productlist += '<span class="attr">on date</span> ' + item.MfgDate + '<br>';//'('+ item.MfgDate +')
+        }
+        productlist += '<div class="btn-group">';
+				  productlist += '<a href="#" class="defaultBtn">Add to cart</a>';
 				  productlist += ' <a href="#" class="shopBtn">VIEW</a>';
 				 productlist += '</div>';
 			productlist += '</form>';
@@ -137,6 +145,7 @@ const getListedItemsHtml = (parent, asset) => {
 
   $('.image-loader').hide();
 };
+/*
 const addNewItemDiv = (parent, asset) => {
   var sku = '',
     itemNumber = '',
@@ -239,7 +248,7 @@ const addNewItemDiv = (parent, asset) => {
     .find("[data-toggle='items-listed']")
     .trigger('click');
 };
-
+*/
 module.exports = {
   addLoader,
   removeLoader,
@@ -247,6 +256,6 @@ module.exports = {
   getMainTabsHtml,
   //addUserHeaderDiv,
   //addEditIconForMobile,
-  getListedItemsHtml,
-  addNewItemDiv
+  getListedItemsHtml
+  //addNewItemDiv
 };

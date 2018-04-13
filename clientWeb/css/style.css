@@ -924,7 +924,7 @@ span.attr {
   min-height: 20px;
   padding: 19px;
   margin-bottom: 20px;
-  background-color: #f5f5f5;
+  background-color: #cde8ef;
   border: 1px solid #e3e3e3;
   -webkit-border-radius: 4px;
      -moz-border-radius: 4px;
@@ -952,4 +952,15 @@ hr.soften {
   float:left;
   border-left: 1px solid #FFF;
   padding-left:5px;
+  font-size:14px;
+}
+
+.shopBtn {margin-top:5px;min-height: 34px;font-size: 14px;font-weight: bold;line-height: 34px;text-align: center;color: #fff;border-radius: 2px;background: #CCCC66;display:inline-block;padding:0 12px;border:0;text-decoration: none;}
+.defaultBtn {margin-top:5px;min-height: 34px;font-size: 14px;font-weight: bold;line-height: 34px;text-align: center;border-radius: 2px;display:inline-block;padding:0 12px;color: #FFF;text-decoration: none;background: #55AAFF;border:0;}
+.shopBtn:hover {color: #fff; text-decoration:none; background:#F86706}
+
+
+.defaultBtn:hover{
+  background: #3E4358;
+  color:#FFF;
 }
