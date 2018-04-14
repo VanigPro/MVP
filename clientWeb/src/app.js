@@ -56,6 +56,23 @@ const app = {
   vendorListItems: ''
 };
 
+jQuery(document.body).on('click', '.defaultBtn', function(){
+  var jsonString = "{\"sku\":\""+ jQuery(this).attr('data-sku') +"\"}";
+  var formData = JSON.parse(jsonString);
+
+  //alert(formData);
+  let $this = $(this);
+  //console.log($this);
+  let requestFor = 'cartItems';
+  //alert(requestFor);
+  if (calculatePayLoad[requestFor]) {
+    const payLoadObj = calculatePayLoad[requestFor](formData, app);
+    console.log(payLoadObj);
+    app.update([payLoadObj], 'tabs', $this);
+  }
+});
+
+/*
  jQuery(document.body).on('click', '#submitBtn', function(){
 		jQuery("form[name=additem]").validate({
  			rules: {
@@ -100,7 +117,7 @@ const app = {
     }
 
 });
-
+*/
 
 $(document).on('click', '#next', function() {
   var newTab = $('#' + app.currentTab).next('.tab-div');
@@ -269,6 +286,13 @@ console.log(parsed);
         app.test = asset;
       }
       break;
+    case 'cartItems':
+        asset = payLoadDecrypt(msgDecryptKey, app.user.private, parsed.asset);
+        console.log(asset);
+        if (asset) {
+          app.test = asset;
+        }
+        break;
     default:
       break;
   }
@@ -329,7 +353,8 @@ app.update = function(payLoadArr, isMessage, $this) {
           } else if (isMessage === 'tabs' || isMessage === 'tabs-all') {
             app.state = 'normal';
             payLoadArr.forEach(payloadObj => {
-              constructTabhtml(payloadObj);
+              console.log('here');
+              //constructTabhtml(payloadObj);
             });
             if (isMessage === 'tabs-all') {
               app.singlePageSave = true;

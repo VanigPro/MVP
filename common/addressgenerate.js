@@ -17,6 +17,7 @@ const PREFIX_CUSTOMER = getAddress(FAMILY_CUSTOMER, 6);
 const customerUserAddr = '00';
 const vendorUserAddr = '01';
 const listedItemsAddr = '02';
+const cartItemsAddr = '03';
 
 const tabAddressGenerate = {
   customerUser: (PREFIX, userpubkey) => {
@@ -30,6 +31,14 @@ const tabAddressGenerate = {
     return (
       PREFIX +
       listedItemsAddr +
+      getAddress(userpubkey, 30) +
+      (sku ? getAddress(sku, 32) : '')
+    );
+  },
+  cartItems: (PREFIX, userpubkey, sku) => {
+    return (
+      PREFIX +
+      cartItemsAddr +
       getAddress(userpubkey, 30) +
       (sku ? getAddress(sku, 32) : '')
     );

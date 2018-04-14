@@ -97,7 +97,7 @@ const getListedItemsHtml = (parent, asset) => {
     '<br><div id="showData" class="well well-small">';
 
   var htmlTableData = '';
-  //console.log(asset);
+  console.log(asset);
   var i = 3;
   asset.forEach(item => {
 
@@ -125,17 +125,17 @@ const getListedItemsHtml = (parent, asset) => {
       productlist += '</p>';
 		productlist += '</div>';
 		productlist += '<div class="span4 alignR">';
-			productlist += '<form class="form-horizontal qtyFrm">';
+			//productlist += '<form class="form-horizontal qtyFrm">';
 				productlist += '<h3> <span class="attr">VANIG tokens</span> ' + item.Price + '</h3>';
 				productlist += '<span class="attr">Mfd. by</span> '+ item.Manufacturer + ' <br>';
         if(item.MfgDate.trim() != ''){
           productlist += '<span class="attr">on date</span> ' + item.MfgDate + '<br>';//'('+ item.MfgDate +')
         }
         productlist += '<div class="btn-group">';
-				  productlist += '<a href="#" class="defaultBtn">Add to cart</a>';
+				  productlist += '<a href="#" class="defaultBtn" data-sku="'+ item.SKU +'">Add to cart</a>';
 				  productlist += ' <a href="#" class="shopBtn">VIEW</a>';
 				 productlist += '</div>';
-			productlist += '</form>';
+			//productlist += '</form>';
 		productlist += '</div>';
 
     productlist += '</div><hr class="soften">';

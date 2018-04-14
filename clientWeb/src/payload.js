@@ -85,6 +85,9 @@ const calculatePayLoad = {
   },
   listedItems: (asset, app) => {
     return getPayLoadObj('create', asset, app, 'listedItems');
+  },
+  cartItems: (asset, app) => {
+    return getPayLoadObj('create', asset, app, 'cartItems');
   }
 };
 
