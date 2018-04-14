@@ -57,7 +57,7 @@ const app = {
 };
 
 jQuery(document.body).on('click', '.defaultBtn', function(){
-  var jsonString = "{\"sku\":\""+ jQuery(this).attr('data-sku') +"\"}";
+  var jsonString = "{\"SKU\":\""+ jQuery(this).attr('data-sku') +"\"}";
   var formData = JSON.parse(jsonString);
 
   //alert(formData);

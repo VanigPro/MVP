@@ -26,6 +26,7 @@ const toInternalError = err => {
 
 router.use(bodyParser.urlencoded({ extended: true }));
 app.use('/', express.static(path.join(__dirname, '../vendorWeb')));
+app.use('/customer', express.static(path.join(__dirname, '../clientWeb')));
 app.use('/product', express.static(path.join(__dirname, '../product')));
 
 router.get('/server_time', function(req, res) {
