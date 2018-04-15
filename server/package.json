@@ -11,7 +11,9 @@
   "scripts": {
     "start": "node .",
     "vendor": "nodemon -r dotenv/config . dotenv_config_path=./.env.vendor",
-    "customer": "nodemon -r dotenv/config . dotenv_config_path=./.env.customer ",
+    "vendor1": "nodemon -r dotenv/config . dotenv_config_path=./.env.vendor1",
+    "customer":
+      "nodemon -r dotenv/config . dotenv_config_path=./.env.customer ",
     "inspect": "node --inspect ."
   },
   "repository": {

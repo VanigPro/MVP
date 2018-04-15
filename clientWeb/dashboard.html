@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="canonical" href="http://vanig.io" />
+  <meta http-equiv="cache-control" content="no-cache" />
+  <meta name="description" content="Vanig eCommerce blockchain">
+  <title>Vanig.io Blockchain</title>
+  <link href="https://fonts.googleapis.com/css?family=Exo+2:300,300i,400,400i,500,500i,600,600i,700" rel="stylesheet">
+  <link rel="stylesheet" href="node_modules/jquery-confirm/dist/jquery-confirm.min.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="css/client.css">
+  <link href="css/jquery.steps.css" rel="stylesheet" type="text/css">
+</head>
+
+<body id="page-top" data-page="payment-page">
+  <div id="dashboard-header" class="fixed">
+    <header>
+      <div class="header-content flex-container flex-container--spacebetween header-right-div">
+        <img src="images/logo.webp" class="logo left" alt="Vanig.io logo">
+        <div class="flex-container header-actions">
+          <a id="logout" class="logout" href="javascript:void(0);">Logout</a>
+        </div>
+      </div>
+    </header>
+    <section class="row-patient">
+      <div class="main-content flex-container flex-container--spacebetween">
+        <div class="patient">
+          <div class="patient--photo">
+            <img width="60" height="60" class="user-photo" alt="patient photo" src="images/user-photo.png">
+          </div>
+          <h1 id="user-full-name" class="patient--name"></h1>
+        </div>
+      </div>
+    </section>
+    <section class="navigation">
+      <div class="main-content flex-container">
+        <a data-toggle="medical-history" class="active nav-li" href="javascript:void(0);">Payment Dashboard</a>
+      </div>
+    </section>
+  </div>
+  <div class="tab-content main-content">
+    <section class="data-patient">
+      <div id="medical-history" class="tab-div">
+        <div class="card">
+          <h2>Vanig Tokens</h2>
+          <table>
+            <tbody>
+              <tr>
+                <th>You Requested</th>
+                <th>You Approved</th>
+                <th>Applied to Vanig</th>
+              </tr>
+              <tr>
+                <td class="balance-amount">0</td>
+                <td class="approve-balance-left">0</td>
+                <td class="total-amsys-payment">0</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+    <div class="poc-steps">
+      <div id="poc-steps-container" > <!--class="hide" -->
+        <h3>Step 1</h3>
+        <section class="first-step">
+          <p>Please unlock an account in metamask and make sure you have ether in your account.</p>
+          <p>Or</p>
+          <p>Use uPort app</p>
+        </section>
+        <h3>Step 2</h3>
+        <section class="second-step">
+          <p>First, you need to request Vanig tokens.</p>
+          <button class="more-token">Request tokens</button>
+        </section>
+        <h3>Step 3</h3>
+        <section class="third-step">
+          <p>Now, approve receipt of 1000 Vanig tokens.</p>
+          <button class="allow-payment">Approve</button>
+        </section>
+        <h3>Step 4</h3>
+        <section class="fourth-step">
+          <p>Pay 100 Vanig tokens to purchase items.</p>
+          <button class="make-payment">Pay 100 Vanig tokens</button>
+        </section>
+      </div>
+    </div>
+  </div>
+  <script src="node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="node_modules/jquery-confirm/dist/jquery-confirm.min.js"></script>
+  <script src="node_modules/jquery-steps/build/jquery.steps.min.js"></script>
+  <script src="node_modules/jquery.cookie/jquery.cookie.js"></script>
+  <script src="dist/bundle.js"></script>
+</body>
+</html>

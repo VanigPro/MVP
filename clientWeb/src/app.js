@@ -6,6 +6,11 @@ const $ = require('jquery');
 
 const intltelinput = require('intl-tel-input');
 const intlTelInputUtils = require('./utils');
+const {
+  pocfun,
+  initContractMethod,
+  getPaymentCountFromEthereum
+} = require('./poc');
 
 const { calculatePayLoad, payLoadDecrypt } = require('./payload');
 const {
@@ -56,8 +61,8 @@ const app = {
   vendorListItems: ''
 };
 
-jQuery(document.body).on('click', '.defaultBtn', function(){
-  var jsonString = "{\"SKU\":\""+ jQuery(this).attr('data-sku') +"\"}";
+jQuery(document.body).on('click', '.defaultBtn', function() {
+  var jsonString = '{"SKU":"' + jQuery(this).attr('data-sku') + '"}';
   var formData = JSON.parse(jsonString);
 
   //alert(formData);
@@ -71,6 +76,32 @@ jQuery(document.body).on('click', '.defaultBtn', function(){
     app.update([payLoadObj], 'tabs', $this);
   }
 });
+
+const addUserNameAndImage = () => {
+  $('#user-full-name').html(app.user.name);
+  if (app.user.imageUrl) {
+    $('.user-photo').attr('src', app.user.imageUrl);
+  }
+};
+
+const paymentInit = () => {
+  var accounts = pocfun(uport);
+  Promise.resolve(accounts).then(function(value) {
+    if (value.length) {
+      calculateDaysDiff(doAfterPaymentStuff);
+      if (pagename === 'payment-page') {
+        addUserNameAndImage();
+        initContractMethod(
+          startTimerForPayment,
+          watchCallback,
+          app.userCreatedTime
+        );
+      }
+    } else {
+      alertBox('Please select Rinkeby Network From Metamask');
+    }
+  }, console.error);
+};
 
 /*
  jQuery(document.body).on('click', '#submitBtn', function(){
@@ -250,7 +281,7 @@ const changeLoginStatus = isLoggedIn => {
 
     let userAddr = '';
     let tabname = 'listeditems';
-    userAddr = '7d7f7702';//tabAddressGenerate[tabname](PREFIX, app.user.public,'');
+    userAddr = '7d7f7702'; //tabAddressGenerate[tabname](PREFIX, app.user.public,'');
     getValidatorState(
       ({ tabData }) => {
         console.log(tabData);
@@ -270,7 +301,6 @@ const changeLoginStatus = isLoggedIn => {
     );
 
     //addNewItemDiv('#add-new-item', app.newItemm);
-
   }
 };
 
@@ -278,7 +308,7 @@ const constructTabhtml = (parsed, fromStart) => {
   console.log(parsed);
   var asset;
   let msgDecryptKey = parsed.msgDecryptKey || app.user.public;
-console.log(parsed);
+  console.log(parsed);
   switch (parsed.isMessage) {
     case 'listedItems':
       asset = payLoadDecrypt(msgDecryptKey, app.user.private, parsed.asset);
@@ -287,12 +317,12 @@ console.log(parsed);
       }
       break;
     case 'cartItems':
-        asset = payLoadDecrypt(msgDecryptKey, app.user.private, parsed.asset);
-        console.log(asset);
-        if (asset) {
-          app.test = asset;
-        }
-        break;
+      asset = payLoadDecrypt(msgDecryptKey, app.user.private, parsed.asset);
+      console.log(asset);
+      if (asset) {
+        app.test = asset;
+      }
+      break;
     default:
       break;
   }
@@ -387,22 +417,22 @@ $(document).on('click', '#logout', function() {
 });
 
 const handleWebsocketResponse = allStateData => {
-console.log('web socket received ',allStateData);
-//  if (app.state === 'edit') {
-   // console.log('user is in edit mode');
- // } else {
-    allStateData.forEach(data => {
-      if (data.value) {
-        const parsed = JSON.parse(atob(data.value));
+  console.log('web socket received ', allStateData);
+  //  if (app.state === 'edit') {
+  // console.log('user is in edit mode');
+  // } else {
+  allStateData.forEach(data => {
+    if (data.value) {
+      const parsed = JSON.parse(atob(data.value));
 
-        if (parsed.owner === app.user.public) {
-          constructTabhtml(parsed);
-        }
-      } else if (data.type == 'DELETE') {
-        console.log(data);
+      if (parsed.owner === app.user.public) {
+        constructTabhtml(parsed);
       }
-    });
- // }
+    } else if (data.type == 'DELETE') {
+      console.log(data);
+    }
+  });
+  // }
 };
 
 app.user = { public: '' };
@@ -419,7 +449,7 @@ const calculateDaysDiff = callback => {
     senderAddr,
     serverTime
   ) {
-    app.daysLeft = Math.floor(Math.abs(paymentBalance / ONE_DAY_TOKEN_CHARGE));
+    app.daysLeft = Math.floor(Math.abs(paymentBalance / ONE_ITEM_TOKEN_CHARGE));
     diffDays(app.userCreatedTime, serverTime);
     if (callback) {
       callback();
@@ -452,7 +482,7 @@ const uport = new Connect('Vanig', {
 
 var timer = 0;
 const initTimerForDiff = (paymentBalance, senderAddr, serverTime) => {
-  app.daysLeft = Math.floor(Math.abs(paymentBalance / ONE_DAY_TOKEN_CHARGE));
+  app.daysLeft = Math.floor(Math.abs(paymentBalance / ONE_ITEM_TOKEN_CHARGE));
   diffDays(app.userCreatedTime, serverTime);
   if (app.daysLeft > 0) {
     //submitPaymentToHyperLedger(paymentBalance, senderAddr)
@@ -484,7 +514,7 @@ const doAfterPaymentStuff = () => {
 
 const watchCallback = paymentBalance => {
   getServerDate(function(serverTime) {
-    app.daysLeft = Math.floor(Math.abs(paymentBalance / ONE_DAY_TOKEN_CHARGE));
+    app.daysLeft = Math.floor(Math.abs(paymentBalance / ONE_ITEM_TOKEN_CHARGE));
     diffDays(app.userCreatedTime, serverTime);
     if (app.daysLeft > 0) {
       window.location.href = 'index.html';
@@ -535,6 +565,7 @@ const createRoleBasedUser = () => {
 };
 
 const proccedAfterSuccessfullLogin = () => {
+  paymentInit();
   changeLoginStatus(true);
 };
 
@@ -602,14 +633,7 @@ const initStartApp = result => {
       credentials.name,
       credentials.avatar
     );
-    if (
-      pagename === 'payment-page' &&
-      (PORTAL_USED_AS === 'MED_PRAC' || !IS_PAYMENT_ENABLE)
-    ) {
-      window.location.href = 'index.html';
-    } else {
-      login(proccedToLogin);
-    }
+    login(proccedToLogin);
   } else {
     proccedToLogin();
   }
