@@ -167,7 +167,7 @@ const initContractMethod = async (callback, watchCallback, userCreatedTime) => {
     if (totalTokenBalance > 0) {
       addLoader(pocStepDiv, 'Please wait your payment request is in process');
       await paymentInstance
-        .pay({ from: accounts[0] })
+        .pay({ from: accounts[0], value: 49 })
         .then(
           function(success) {
             isPaymentDone = true;
