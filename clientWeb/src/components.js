@@ -132,8 +132,7 @@ const getListedItemsHtml = (parent, asset) => {
           productlist += '<span class="attr">on date</span> ' + item.MfgDate + '<br>';//'('+ item.MfgDate +')
         }
         productlist += '<div class="btn-group">';
-				  productlist += '<a href="#" class="defaultBtn" data-sku="'+ item.SKU +'">Add to cart</a>';
-				  productlist += ' <a href="#" class="shopBtn">VIEW</a>';
+				  productlist += '<a href="#" class="defaultBtn" data-sku="'+ item.SKU +'" data-owner="'+ item.owner +'">Add to cart</a>';
 				 productlist += '</div>';
 			//productlist += '</form>';
 		productlist += '</div>';

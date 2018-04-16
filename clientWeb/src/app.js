@@ -62,10 +62,9 @@ const app = {
 };
 
 jQuery(document.body).on('click', '.defaultBtn', function() {
-  var jsonString = '{"SKU":"' + jQuery(this).attr('data-sku') + '"}';
+  var jsonString = '{"SKU":"' + jQuery(this).attr('data-sku') + '", "OWNER":"' + jQuery(this).attr('data-owner') + '"}';
   var formData = JSON.parse(jsonString);
 
-  //alert(formData);
   let $this = $(this);
   //console.log($this);
   let requestFor = 'cartItems';
@@ -281,6 +280,7 @@ const changeLoginStatus = isLoggedIn => {
 
     let userAddr = '';
     let tabname = 'listeditems';
+    let itemJSON = {};
     userAddr = '7d7f7702'; //tabAddressGenerate[tabname](PREFIX, app.user.public,'');
     getValidatorState(
       ({ tabData }) => {
@@ -288,7 +288,9 @@ const changeLoginStatus = isLoggedIn => {
 
         if (tabData.length) {
           tabData.forEach(payloadObj => {
-            items.push(JSON.parse(payloadObj.asset));
+            itemJSON = JSON.parse(payloadObj.asset);
+            itemJSON['owner'] = payloadObj.owner;
+            items.push(itemJSON);
           });
 
           app.Items = items;
