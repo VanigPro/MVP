@@ -22,7 +22,7 @@ contract Payment is Ownable {
    * @dev Function to execute a tokenAmount token payment
    * @param tokenAmount amount to be paid for payments
    */
-  function pay(uint256 tokenAmount) public {
+  function pay(uint tokenAmount) public {
     token.safeTransferFrom(msg.sender, paymentAddress, tokenAmount);
     emit LogPayment(msg.sender, paymentAddress, tokenAmount);
   }
