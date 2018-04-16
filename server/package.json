@@ -12,8 +12,7 @@
     "start": "node .",
     "vendor": "nodemon -r dotenv/config . dotenv_config_path=./.env.vendor",
     "vendor1": "nodemon -r dotenv/config . dotenv_config_path=./.env.vendor1",
-    "customer":
-      "nodemon -r dotenv/config . dotenv_config_path=./.env.customer ",
+    "customer": "nodemon -r dotenv/config . dotenv_config_path=./.env.customer ",
     "inspect": "node --inspect ."
   },
   "repository": {
