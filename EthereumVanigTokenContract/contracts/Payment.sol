@@ -11,7 +11,7 @@ contract Payment is Ownable {
   address paymentAddress;
 
   event LogPayment(address indexed sender, address indexed receiver, uint indexed amount);
-  
+
   function Payment(address tokenAddress, address toPay) public {
     token = StandardToken(tokenAddress);
     paymentAddress = toPay;
@@ -19,11 +19,12 @@ contract Payment is Ownable {
 
 
   /**
-   * @dev Function to execute a 100 token payment
+   * @dev Function to execute a tokenAmount token payment
+   * @param tokenAmount amount to be paid for payments
    */
-  function pay() public {
-    token.safeTransferFrom(msg.sender, paymentAddress, 100);
-    emit LogPayment(msg.sender, paymentAddress, 100);
+  function pay(unit256 tokenAmount) public {
+    token.safeTransferFrom(msg.sender, paymentAddress, tokenAmount);
+    emit LogPayment(msg.sender, paymentAddress, tokenAmount);
   }
 
   /**
