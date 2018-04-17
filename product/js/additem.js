@@ -18,7 +18,7 @@ $(function() {
 
     submitHandler: function(form) {
 		$.ajax({
-			url: 'test_post.php', // url where to submit the request
+			url: 'http://localhost:3000/save_item', // url where to submit the request
 			type : "POST",
 			dataType : 'json',
 			data : $("#frmadditem").serialize(), // post data || get data
@@ -34,5 +34,5 @@ $(function() {
 			}
 		})
     }
-  });  
+  });
 });
