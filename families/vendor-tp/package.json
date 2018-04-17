@@ -12,6 +12,7 @@
     "test": "mocha --recursive",
     "start": "node index.js",
     "tp": "nodemon",
+    "tp1": "nodemon -r dotenv/config . dotenv_config_path=./.env.tp1",
     "inspect": "node --inspect ."
   },
   "repository": {
