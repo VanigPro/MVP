@@ -199,7 +199,6 @@ router.post('/save_item', function(req, res) {
       }
     );
 
-    //console.log(payLoadArr);
     //res.status(200).send(req.body);
   } catch (error) {
     toInternalError(error);
