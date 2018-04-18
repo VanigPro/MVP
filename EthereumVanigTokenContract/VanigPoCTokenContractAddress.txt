@@ -2,6 +2,32 @@ truffle migrate --network rinkeby
 
 Writing artifacts to ./build/contracts
 
+LATEST WORKING one.
+------------------------------
+Using network 'rinkeby'.
+
+Running migration: 1_initial_migration.js
+  Deploying Migrations...
+  ... 0xb21494bdc6a18fd69d2cf009a927497d3b275f04c31327a47ee256af81eba9df
+  Migrations: 0xcc8989b9ca91b4d989861f7bff295ffb9570c124
+Saving successful migration to network...
+  ... 0x1997990eefe926304fdc70be7412edc9f12792f26c3b1773d6d37f586ec77366
+Saving artifacts...
+Running migration: 2_deploy_contracts.js
+  Deploying PoCToken...
+  ... 0x455c9ae6eccfb7bc50527b2ef243b683c49bb3ca1190a7603289ca31c844394d
+  PoCToken: 0xd9bca8bbf951676e7f2dd066940235472408c068
+  Deploying Payment...
+  ... 0x179ca500aa7ed877e31b3df89bcc283c93f1cbc236679ad34053ad7111f1ff80
+  Payment: 0x19c16f8b1ac122680081a949669cd777bc755c8a
+Saving successful migration to network...
+  ... 0x7ff6c9613f6b833feb2fe1fda093bfc9d4e7b5266161e4f3acbba3b4ceb862f9
+Saving artifacts...
+------------------------------
+
+
+Writing artifacts to ./build/contracts
+
 
 
 Using network 'rinkeby'.
