@@ -22,12 +22,12 @@
 
 <script>
 $(function() {
-	 $.ajax({ 
-		type: 'GET', 
-		url: 'tmpdata.json', 
-		data: { get_param: 'value' }, 
+	 $.ajax({
+		type: 'GET',
+		url: 'http://localhost:3000/get_item_list',
+		data: { get_param: 'value' },
 		dataType: 'json',
-		success: function (data) { 
+		success: function (data) {
 			var col = [];
 			for (var i = 0; i < data.length; i++) {
 				for (var key in data[i]) {
@@ -37,7 +37,6 @@ $(function() {
 				}
 			}
 
-			// CREATE DYNAMIC TABLE.
 			var table = document.createElement("table");
 
 			// CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
@@ -65,7 +64,7 @@ $(function() {
 			var divContainer = document.getElementById("showData");
 			divContainer.innerHTML = "";
 			divContainer.appendChild(table);
-		
+
 			/*$.each(data, function(index, element) {
 				$('body').append($('<div>', {
 					text: element.SKU

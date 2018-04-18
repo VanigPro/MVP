@@ -6,9 +6,11 @@ const bodyParser = require('body-parser');
 const { API_URL, ETHEREUM_API_KEY } = require('./../config');
 
 const { getBatchBytes } = require('./transaction');
+const { makeKeyPair } = require('./../common');
 
 const express = require('express');
 const path = require('path');
+const atob = require('atob');
 const app = express();
 
 app.use(cors());
@@ -45,6 +47,162 @@ router.get('/get_portal', function(req, res) {
   };
   console.log(resObj);
   res.status(200).send(resObj);
+});
+
+
+//get list of items with owner
+router.get('/get_item_list', function(req, res) {
+  let userAddr = '';
+  let tabname = 'listeditems';
+  userAddr = '7d7f7702';//tabAddressGenerate[tabname](PREFIX, app.user.public,'');
+
+  let asset = {};
+  let tmpObj = {};
+  let items = [];
+  let parsed = {};
+
+  try {
+    const url = API_URL + '/state?address=' + userAddr;
+    request.get(url, function(error, response, body) {
+      let resObj;
+      if (error) {
+        console.error(error);
+        resObj = { error: error, body: null };
+      } else {
+
+        //check if json
+        try{
+          parsed = JSON.parse(body);
+        }
+        catch (error){
+          resObj = { error: error, body: null };
+          res.status(200).send(resObj);
+        }
+
+        console.log(parsed.data.length);
+        if (parsed.data.length) {
+          parsed.data.forEach(payloadObj => {
+            asset = JSON.parse(atob(payloadObj.data))
+            tmpObj = JSON.parse(asset.asset);
+            tmpObj['owner'] = asset.owner;
+            items.push(tmpObj);
+          });
+
+        }
+      }
+      //console.log(resObj);
+      res.status(200).send(items);
+    });
+  } catch (error) {
+    resObj = { error: error, body: null };
+    res.status(200).send(resObj);
+  }
+});
+
+// Application Object
+const appObj = {
+  user: null,
+  keys: [],
+  state: 'normal',
+  currentTab: 'items-listed',
+  vendorListItems: ''
+};
+
+router.post('/save_item', function(req, res) {
+  try {
+    console.log(req.body);
+    //const body = req.body;
+
+    //calculate payLoad
+    let asset = req.body;
+
+    let action = 'create';
+    let isMessage = 'listedItems';
+
+    let pubKey = req.body.OwnerID
+    let usrName = req.body.OwnerName;
+    let usrAvatar = '';
+    appObj.user = makeKeyPair(
+      pubKey,
+      usrName,
+      usrAvatar
+    );
+    //console.log(appObj);
+
+    //let pubKey = pubKey ? pubKey : appObj.user.public;
+    let bothUserKeys = null;
+
+    const payLoadObj = {
+      action,
+      asset: JSON.stringify(asset),//payLoadEncrypt(pubKey, appObj.user.private, asset, isMessage),
+      owner: appObj.user.public,
+      isMessage,
+      bothUserKeys,
+      msgDecryptKey: appObj.user.public
+    };
+
+
+    let reqData = {
+      payloadArr: payLoadObj,
+      privateKey: appObj.user.private
+    };
+
+    const body = reqData;
+    const payLoadArr = new Array(reqData.payloadArr);
+    //payLoadArr.time = new Date().getTime();
+    payLoadArr.forEach(payloadObj => {
+      payloadObj.time = new Date().getTime();
+      console.log(payloadObj);
+    });
+
+    const batchBytes = getBatchBytes(payLoadArr, body.privateKey);
+    //console.log(`${API_URL}/batches?wait`);
+
+    request.post(
+      {
+        uri: `${API_URL}/batches?wait`,
+        headers: { 'Content-Type': 'application/octet-stream' },
+        body: batchBytes
+      },
+      function(error, response, body) {
+        let resObj;
+        if (error) {
+          console.error(error);
+          resObj = { error: error, body: null };
+          res.status(200).send(resObj);
+        } else {
+          try {
+            // Need try catch for url
+            let url = JSON.parse(body).link;
+            //console.log(url);
+            // This is used for checking succesfully commited transaction in sawtooth
+            request.get(url, { timeout: 30000 }, function(
+              error,
+              response,
+              body
+            ) {
+              if (error) {
+                resObj = { error: error, body: null };
+              } else {
+                resObj = {
+                  error: false,
+                  body: body,
+                  time: new Date().getTime()
+                };
+              }
+              res.status(200).send(resObj);
+            });
+          } catch (error) {
+            toInternalError(error);
+          }
+        }
+      }
+    );
+
+    //res.status(200).send(req.body);
+  } catch (error) {
+    toInternalError(error);
+  }
 });
 
 router.post('/get_validator_state', function(req, res) {
