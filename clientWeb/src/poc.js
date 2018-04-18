@@ -96,8 +96,9 @@ const initContractMethod = async (callback, watchCallback, userCreatedTime) => {
 
   var isPaymentDone = false;
   const paymentEvent = await paymentInstance.LogPayment(
-    { sender: accounts[0] },
-    { fromBlock: 0, toBlock: 'latest' }
+    { sender: accounts[0]},
+    { fromBlock: 0, toBlock: 'latest'}
+
   );
 
   const latestBlock = await web3.eth.getBlockNumber();
@@ -167,7 +168,7 @@ const initContractMethod = async (callback, watchCallback, userCreatedTime) => {
     if (totalTokenBalance > 0) {
       addLoader(pocStepDiv, 'Please wait your payment request is in process');
       await paymentInstance
-        .pay({ from: accounts[0], value: 49 })
+        .pay(7,{ from: accounts[0]} )
         .then(
           function(success) {
             isPaymentDone = true;
@@ -185,7 +186,7 @@ const initContractMethod = async (callback, watchCallback, userCreatedTime) => {
         .catch(console.error);
     } else {
       alertBox(
-        'You must request and approve additional Amchart tokens before proceeding'
+        'You must request and approve additional VANIG tokens before proceeding'
       );
     }
   });
