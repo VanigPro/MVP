@@ -62,7 +62,12 @@ const app = {
 };
 
 jQuery(document.body).on('click', '.defaultBtn', function() {
-  var jsonString = '{"SKU":"' + jQuery(this).attr('data-sku') + '", "OWNER":"' + jQuery(this).attr('data-owner') + '"}';
+  var jsonString =
+    '{"SKU":"' +
+    jQuery(this).attr('data-sku') +
+    '", "OWNER":"' +
+    jQuery(this).attr('data-owner') +
+    '"}';
   var formData = JSON.parse(jsonString);
 
   let $this = $(this);
@@ -271,38 +276,40 @@ const changeLoginStatus = isLoggedIn => {
   if (isLoggedIn) {
     initWebSocket(PREFIX, handleWebsocketResponse);
     $('#user-login-div').remove();
-    $(document.body).append(getHeaderHtml() + getMainTabsHtml());
-    //addUserHeaderDiv(app.user.imageUrl, app.user.name);
-    //addUserNameAndImage();
-    //addEditIconForMobile();
+    if (pagename !== 'payment-page') {
+      $(document.body).append(getHeaderHtml() + getMainTabsHtml());
+      //addUserHeaderDiv(app.user.imageUrl, app.user.name);
+      //addUserNameAndImage();
+      //addEditIconForMobile();
 
-    let items = new Array();
+      let items = new Array();
 
-    let userAddr = '';
-    let tabname = 'listeditems';
-    let itemJSON = {};
-    userAddr = '7d7f7702'; //tabAddressGenerate[tabname](PREFIX, app.user.public,'');
-    getValidatorState(
-      ({ tabData }) => {
-        console.log(tabData);
+      let userAddr = '';
+      let tabname = 'listeditems';
+      let itemJSON = {};
+      userAddr = '7d7f7702'; //tabAddressGenerate[tabname](PREFIX, app.user.public,'');
+      getValidatorState(
+        ({ tabData }) => {
+          console.log(tabData);
 
-        if (tabData.length) {
-          tabData.forEach(payloadObj => {
-            itemJSON = JSON.parse(payloadObj.asset);
-            itemJSON['owner'] = payloadObj.owner;
-            items.push(itemJSON);
-          });
+          if (tabData.length) {
+            tabData.forEach(payloadObj => {
+              itemJSON = JSON.parse(payloadObj.asset);
+              itemJSON['owner'] = payloadObj.owner;
+              items.push(itemJSON);
+            });
 
-          app.Items = items;
-          //console.log(items);
-          getListedItemsHtml('#items-listed', app.Items);
-        }
-      },
-      userAddr,
-      tabname
-    );
+            app.Items = items;
+            //console.log(items);
+            getListedItemsHtml('#items-listed', app.Items);
+          }
+        },
+        userAddr,
+        tabname
+      );
 
-    //addNewItemDiv('#add-new-item', app.newItemm);
+      //addNewItemDiv('#add-new-item', app.newItemm);
+    }
   }
 };
 
@@ -504,13 +511,13 @@ const startTimerForPayment = () => {
 
 const doAfterPaymentStuff = () => {
   if (pagename !== 'payment-page') {
-    if (app.daysLeft > 0) {
-      changeLoginStatus(true);
-    } else {
-      window.location.href = 'dashboard.html';
-    }
-  } else if (app.daysLeft > 0) {
-    window.location.href = 'index.html';
+    //  if (app.daysLeft > 0) {
+    //  changeLoginStatus(true);
+    //} else {
+    //window.location.href = 'dashboard.html';
+    //  }
+    //  } else if (app.daysLeft > 0) {
+    //  window.location.href = 'index.html';
   }
 };
 
@@ -518,9 +525,9 @@ const watchCallback = paymentBalance => {
   getServerDate(function(serverTime) {
     app.daysLeft = Math.floor(Math.abs(paymentBalance / ONE_ITEM_TOKEN_CHARGE));
     diffDays(app.userCreatedTime, serverTime);
-    if (app.daysLeft > 0) {
+    /*  if (app.daysLeft > 0) {
       window.location.href = 'index.html';
-    }
+    }*/
   });
 };
 
