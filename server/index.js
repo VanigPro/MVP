@@ -103,13 +103,124 @@ router.get('/get_item_list', function(req, res) {
 const appObj = {
   user: null,
   keys: [],
-  state: 'normal',
+  state: 'normal' /*,
   currentTab: 'items-listed',
-  vendorListItems: ''
+  vendorListItems: ''*/
 };
+
+//from vendorWeb/src/payload.js
+const payLoadEncrypt = (pubKey, privKey, payload, isMessage) => {
+  payload = JSON.stringify(payload);
+  return payload;
+};
+
+//from vendorWeb/src/app.js
+const getPayLoadObj = (action, asset, appObj, isMessage, bothUserKeys, pubKey) => {
+  pubKey = pubKey ? pubKey : appObj.user.public;
+  return {
+    action,
+    asset: payLoadEncrypt(pubKey, appObj.user.private, asset, isMessage),
+    owner: appObj.user.public,
+    isMessage,
+    bothUserKeys,
+    msgDecryptKey: appObj.user.public
+  };
+};
+
+//from vendorWeb/src/payload.js
+const calculatePayLoad = {
+  vendorUser: (isTest, appObj) => {
+    let asset = { name: appObj.user.name, isTest };
+    return getPayLoadObj('create', asset, appObj, 'vendorUser');
+  },
+  /*customerUser: (isTest, appObj) => {
+    let asset = { name: appObj.user.name, isTest };
+    return getPayLoadObj('create', asset, appObj, 'customerUser');
+  },
+  payment: (amount, senderAddr, appObj) => {
+    let asset = {
+      sender: senderAddr,
+      amount: amount,
+      receiver: '0x1'
+    };
+    return getPayLoadObj('create', asset, appObj, 'payment');
+  },
+  listedItems: (asset, appObj) => {
+    return getPayLoadObj('create', asset, appObj, 'listedItems');
+  }*/
+};
+//from vendorWeb/src/app.js
+const userCreate = isTest => {
+  let isMessage = 'vendorUser';
+  const payLoadObj = calculatePayLoad[isMessage](isTest, appObj);
+  //app.update([payLoadObj], isMessage);
+  //console.log(payLoadObj);
+  let payLoadArr = [payLoadObj];
+
+  let reqData = {
+    payloadArr: payLoadArr,
+    privateKey: appObj.user.private
+  };
+
+  const body = reqData;
+  //payLoadArr.time = new Date().getTime();
+  payLoadArr.forEach(payloadObj => {
+    payloadObj.time = new Date().getTime();
+    console.log(payloadObj);
+  });
+
+  const batchBytes = getBatchBytes(payLoadArr, body.privateKey);
+  //console.log(batchBytes);
+
+  request.post(
+    {
+      uri: `${API_URL}/batches?wait`,
+      headers: { 'Content-Type': 'application/octet-stream' },
+      body: batchBytes
+    },
+    function(error, response, body) {
+      let resObj;
+      if (error) {
+        console.error(error);
+        resObj = { error: error, body: null };
+        return resObj;
+        //res.status(200).send(resObj);
+      } else {
+        try {
+          // Need try catch for url
+          let url = JSON.parse(body).link;
+          //console.log(url);
+          // This is used for checking succesfully commited transaction in sawtooth
+          request.get(url, { timeout: 30000 }, function(
+            error,
+            response,
+            body
+          ) {
+            if (error) {
+              resObj = { error: error, body: null };
+            } else {
+              resObj = {
+                error: false,
+                body: body,
+                time: new Date().getTime()
+              };
+            }
+            return resObj;
+            //res.status(200).send(resObj);
+          });
+        } catch (error) {
+          toInternalError(error);
+        }
+      }
+    }
+  );
+
+};
+
 
 router.post('/save_item', function(req, res) {
   try {
+
     console.log(req.body);
     //const body = req.body;
 
@@ -129,6 +240,8 @@ router.post('/save_item', function(req, res) {
     );
     //console.log(appObj);
 
+    let tmpObj = userCreate(false);
+    
     //let pubKey = pubKey ? pubKey : appObj.user.public;
     let bothUserKeys = null;
 
