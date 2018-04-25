@@ -56,7 +56,9 @@ const tabAddressGenerate = {
   },
   Mfg: (PREFIX, Manufacturer) => {
     //2. Need API retrieve to list of manufacturers name and ID
-    return PREFIX + MfgAddr + getAddress(Manufacturer, 62);
+    return (
+      PREFIX + MfgAddr + (Manufacturer ? getAddress(Manufacturer, 62) : '')
+    );
   },
   SKU: (PREFIX, SKU) => {
     //4. Need API to retrieve full product info -all the fields for specific SKU
