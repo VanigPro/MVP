@@ -57,13 +57,12 @@ router.get('/get_portal', function(req, res) {
   res.status(200).send(resObj);
 });
 
-
 //get list of items with owner
 router.get('/get_item_list', function(req, res) {
   let userAddr = '';
   let tabname = 'listeditems';
-  
-  userAddr = '7d7f7702';//tabAddressGenerate[tabname](PREFIX, app.user.public,'');
+
+  userAddr = '7d7f7702'; //tabAddressGenerate[tabname](PREFIX, app.user.public,'');
   //userAddr = tabAddressGenerate[tabname](PREFIX, app.user.public,'');
 
   let asset = {};
@@ -79,12 +78,10 @@ router.get('/get_item_list', function(req, res) {
         console.error(error);
         resObj = { error: error, body: null };
       } else {
-
         //check if json
-        try{
+        try {
           parsed = JSON.parse(body);
-        }
-        catch (error){
+        } catch (error) {
           resObj = { error: error, body: null };
           res.status(200).send(resObj);
         }
@@ -92,12 +89,11 @@ router.get('/get_item_list', function(req, res) {
         console.log(parsed.data.length);
         if (parsed.data.length) {
           parsed.data.forEach(payloadObj => {
-            asset = JSON.parse(atob(payloadObj.data))
+            asset = JSON.parse(atob(payloadObj.data));
             tmpObj = JSON.parse(asset.asset);
             tmpObj['owner'] = asset.owner;
             items.push(tmpObj);
           });
-
         }
       }
       //console.log(resObj);
@@ -125,7 +121,14 @@ const payLoadEncrypt = (pubKey, privKey, payload, isMessage) => {
 };
 
 //from vendorWeb/src/app.js
-const getPayLoadObj = (action, asset, appObj, isMessage, bothUserKeys, pubKey) => {
+const getPayLoadObj = (
+  action,
+  asset,
+  appObj,
+  isMessage,
+  bothUserKeys,
+  pubKey
+) => {
   pubKey = pubKey ? pubKey : appObj.user.public;
   return {
     action,
@@ -142,7 +145,7 @@ const calculatePayLoad = {
   vendorUser: (isTest, appObj) => {
     let asset = { name: appObj.user.name, isTest };
     return getPayLoadObj('create', asset, appObj, 'vendorUser');
-  },
+  }
   /*customerUser: (isTest, appObj) => {
     let asset = { name: appObj.user.name, isTest };
     return getPayLoadObj('create', asset, appObj, 'customerUser');
@@ -160,7 +163,7 @@ const calculatePayLoad = {
   }*/
 };
 //from vendorWeb/src/app.js
-const userCreate = isTest => {
+const userCreate = (isTest, cb) => {
   let isMessage = 'vendorUser';
   const payLoadObj = calculatePayLoad[isMessage](isTest, appObj);
   //app.update([payLoadObj], isMessage);
@@ -193,6 +196,7 @@ const userCreate = isTest => {
       if (error) {
         console.error(error);
         resObj = { error: error, body: null };
+        cb(resObj);
         return resObj;
         //res.status(200).send(resObj);
       } else {
@@ -201,11 +205,7 @@ const userCreate = isTest => {
           let url = JSON.parse(body).link;
           //console.log(url);
           // This is used for checking succesfully commited transaction in sawtooth
-          request.get(url, { timeout: 30000 }, function(
-            error,
-            response,
-            body
-          ) {
+          request.get(url, { timeout: 30000 }, function(error, response, body) {
             if (error) {
               resObj = { error: error, body: null };
             } else {
@@ -215,22 +215,22 @@ const userCreate = isTest => {
                 time: new Date().getTime()
               };
             }
+            cb(resObj);
             return resObj;
             //res.status(200).send(resObj);
           });
         } catch (error) {
+          resObj = { error: error, body: null };
+          cb(resObj);
           toInternalError(error);
         }
       }
     }
   );
-
 };
-
 
 router.post('/save_item', function(req, res) {
   try {
-
     console.log(req.body);
     //const body = req.body;
 
@@ -240,87 +240,84 @@ router.post('/save_item', function(req, res) {
     let action = 'create';
     let isMessage = 'listedItems';
 
-    let pubKey = req.body.OwnerID
+    let pubKey = req.body.OwnerID;
     let usrName = req.body.OwnerName;
     let usrAvatar = '';
-    appObj.user = makeKeyPair(
-      pubKey,
-      usrName,
-      usrAvatar
-    );
+    appObj.user = makeKeyPair(pubKey, usrName, usrAvatar);
     //console.log(appObj);
 
-    let tmpObj = userCreate(false);
+    let tmpObj = userCreate(false, resObj => {
+      // user create return value if required.....
 
-    //let pubKey = pubKey ? pubKey : appObj.user.public;
-    let bothUserKeys = null;
+      //let pubKey = pubKey ? pubKey : appObj.user.public;
+      let bothUserKeys = null;
 
-    const payLoadObj = {
-      action,
-      asset: JSON.stringify(asset),//payLoadEncrypt(pubKey, appObj.user.private, asset, isMessage),
-      owner: appObj.user.public,
-      isMessage,
-      bothUserKeys,
-      msgDecryptKey: appObj.user.public
-    };
+      const payLoadObj = {
+        action,
+        asset: JSON.stringify(asset), //payLoadEncrypt(pubKey, appObj.user.private, asset, isMessage),
+        owner: appObj.user.public,
+        isMessage,
+        bothUserKeys,
+        msgDecryptKey: appObj.user.public
+      };
 
+      let reqData = {
+        payloadArr: payLoadObj,
+        privateKey: appObj.user.private
+      };
 
-    let reqData = {
-      payloadArr: payLoadObj,
-      privateKey: appObj.user.private
-    };
+      const body = reqData;
+      const payLoadArr = new Array(reqData.payloadArr);
+      //payLoadArr.time = new Date().getTime();
+      payLoadArr.forEach(payloadObj => {
+        payloadObj.time = new Date().getTime();
+        console.log(payloadObj);
+      });
 
-    const body = reqData;
-    const payLoadArr = new Array(reqData.payloadArr);
-    //payLoadArr.time = new Date().getTime();
-    payLoadArr.forEach(payloadObj => {
-      payloadObj.time = new Date().getTime();
-      console.log(payloadObj);
-    });
+      const batchBytes = getBatchBytes(payLoadArr, body.privateKey);
+      //console.log(`${API_URL}/batches?wait`);
 
-    const batchBytes = getBatchBytes(payLoadArr, body.privateKey);
-    //console.log(`${API_URL}/batches?wait`);
-
-    request.post(
-      {
-        uri: `${API_URL}/batches?wait`,
-        headers: { 'Content-Type': 'application/octet-stream' },
-        body: batchBytes
-      },
-      function(error, response, body) {
-        let resObj;
-        if (error) {
-          console.error(error);
-          resObj = { error: error, body: null };
-          res.status(200).send(resObj);
-        } else {
-          try {
-            // Need try catch for url
-            let url = JSON.parse(body).link;
-            //console.log(url);
-            // This is used for checking succesfully commited transaction in sawtooth
-            request.get(url, { timeout: 30000 }, function(
-              error,
-              response,
-              body
-            ) {
-              if (error) {
-                resObj = { error: error, body: null };
-              } else {
-                resObj = {
-                  error: false,
-                  body: body,
-                  time: new Date().getTime()
-                };
-              }
-              res.status(200).send(resObj);
-            });
-          } catch (error) {
-            toInternalError(error);
+      request.post(
+        {
+          uri: `${API_URL}/batches?wait`,
+          headers: { 'Content-Type': 'application/octet-stream' },
+          body: batchBytes
+        },
+        function(error, response, body) {
+          let resObj;
+          if (error) {
+            console.error(error);
+            resObj = { error: error, body: null };
+            res.status(200).send(resObj);
+          } else {
+            try {
+              // Need try catch for url
+              let url = JSON.parse(body).link;
+              //console.log(url);
+              // This is used for checking succesfully commited transaction in sawtooth
+              request.get(url, { timeout: 30000 }, function(
+                error,
+                response,
+                body
+              ) {
+                if (error) {
+                  resObj = { error: error, body: null };
+                } else {
+                  resObj = {
+                    error: false,
+                    body: body,
+                    time: new Date().getTime()
+                  };
+                }
+                res.status(200).send(resObj);
+              });
+            } catch (error) {
+              toInternalError(error);
+            }
           }
         }
-      }
-    );
+      );
+    });
 
     //res.status(200).send(req.body);
   } catch (error) {
