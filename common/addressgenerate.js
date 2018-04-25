@@ -18,6 +18,7 @@ const customerUserAddr = '00';
 const vendorUserAddr = '01';
 const listedItemsAddr = '02';
 const cartItemsAddr = '03';
+const listedItemsMfgAddr = '04';
 
 const tabAddressGenerate = {
   customerUser: (PREFIX, userpubkey) => {
@@ -41,6 +42,14 @@ const tabAddressGenerate = {
       cartItemsAddr +
       getAddress(userpubkey, 30) +
       (sku ? getAddress(sku, 32) : '')
+    );
+  },
+  listedItemsMfg: (PREFIX, userpubkey, Manufacturer) => {
+    return (
+      PREFIX +
+      listedItemsMfgAddr +
+      getAddress(userpubkey, 30) +
+      (Manufacturer ? getAddress(Manufacturer, 32) : '')
     );
   }
 };

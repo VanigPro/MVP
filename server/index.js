@@ -8,6 +8,14 @@ const { API_URL, ETHEREUM_API_KEY } = require('./../config');
 const { getBatchBytes } = require('./transaction');
 const { makeKeyPair } = require('./../common');
 
+const {
+  getAddress,
+  tabAddressGenerate
+} = require('./../common/addressgenerate');
+
+const { FAMILY_VENDOR, VERSION } = require('./../config');
+const PREFIX = getAddress(FAMILY_VENDOR, 6);
+
 const express = require('express');
 const path = require('path');
 const atob = require('atob');
@@ -55,6 +63,7 @@ router.get('/get_item_list', function(req, res) {
   let userAddr = '';
   let tabname = 'listeditems';
   userAddr = '7d7f7702';//tabAddressGenerate[tabname](PREFIX, app.user.public,'');
+  //userAddr = tabAddressGenerate[tabname](PREFIX, app.user.public,'');
 
   let asset = {};
   let tmpObj = {};
@@ -241,7 +250,7 @@ router.post('/save_item', function(req, res) {
     //console.log(appObj);
 
     let tmpObj = userCreate(false);
-    
+
     //let pubKey = pubKey ? pubKey : appObj.user.public;
     let bothUserKeys = null;
 
