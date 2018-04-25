@@ -66,19 +66,27 @@ const createAsset = (txnModel, state) => {
 
           const assetAddress = tabAddressGenerate['listedItems'](
             PREFIX,
+            assetjson.SKU,
             owner,
-            assetjson.SKU
           );
-
-          const assetAddressMfg = tabAddressGenerate['listedItemsMfg'](
+          const assetAddressMfgSKU = tabAddressGenerate['listedItemsMfg'](
             PREFIX,
-            owner,
+            assetjson.Manufacturer,
+            assetjson.SKU,
+          );
+          const assetAddressMfg = tabAddressGenerate['Mfg'](
+            PREFIX,
             assetjson.Manufacturer
           );
-
+          const assetAddressSKU = tabAddressGenerate['SKU'](
+            PREFIX,
+            assetjson.SKU
+          );
           return state.setState({
             [assetAddress]: encode({ asset, owner, isMessage:'listedItems', time }),
-            [assetAddressMfg]: encode({ asset, owner, isMessage:'listedItemsMfg', time })
+            [assetAddressMfgSKU]: encode({ asset, owner, isMessage:'listedItemsMfg', time })
+            [assetAddressMfg]: encode({ asset, owner, isMessage:'Mfg', time })
+            [assetAddressSKU]: encode({ asset, owner, isMessage:'SKU', time })
           });
         } else {
           throw new InvalidTransaction('Invalid method found');

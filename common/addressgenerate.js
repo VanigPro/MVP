@@ -19,7 +19,8 @@ const vendorUserAddr = '01';
 const listedItemsAddr = '02';
 const cartItemsAddr = '03';
 const listedItemsMfgAddr = '04';
-
+const MfgAddr = '05';
+const SKUAddr = '06';
 const tabAddressGenerate = {
   customerUser: (PREFIX, userpubkey) => {
     return PREFIX + customerUserAddr + getAddress(userpubkey, 62);
@@ -44,13 +45,22 @@ const tabAddressGenerate = {
       (sku ? getAddress(sku, 32) : '')
     );
   },
-  listedItemsMfg: (PREFIX, userpubkey, Manufacturer) => {
+  listedItemsMfg: (PREFIX, Manufacturer, sku) => {
+    //3. Need API to retrieve list of all product's for a specific manu. by manufacturer ID(just the SKUs not the whole info)
     return (
       PREFIX +
       listedItemsMfgAddr +
-      getAddress(userpubkey, 30) +
-      (Manufacturer ? getAddress(Manufacturer, 32) : '')
+      getAddress(Manufacturer, 32) +
+      (sku ? getAddress(sku, 30) : '')
     );
+  },
+  Mfg: (PREFIX, Manufacturer) => {
+    //2. Need API retrieve to list of manufacturers name and ID
+    return PREFIX + MfgAddr + getAddress(Manufacturer, 62);
+  },
+  SKU: (PREFIX, SKU) => {
+    //4. Need API to retrieve full product info -all the fields for specific SKU
+    return PREFIX + SKUAddr + getAddress(SKU, 62);
   }
 };
 module.exports = {
