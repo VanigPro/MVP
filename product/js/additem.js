@@ -18,7 +18,7 @@ $(function() {
 
     submitHandler: function(form) {
 		$.ajax({
-			url: 'http://localhost:3000/save_item',// url where to submit the request
+			url: '../save_item',// url where to submit the request
 			type : "POST",
 			dataType : 'json',
 			data : $("#frmadditem").serialize(),
