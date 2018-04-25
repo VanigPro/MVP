@@ -157,7 +157,7 @@ router.get('/get_sku_item', function(req, res) {
 router.get('/get_mfg_items_list', function(req, res) {
   let userAddr = '';
   let tabname = 'listeditems';
-  var mgg = req.query ? req.query.mfg : null; // $_GET["id"]
+  var mfg = req.query ? req.query.mfg : null; // $_GET["id"]
 
   if (mfg === null) {
     resObj = { error: 'Need Manufacturer (mfg) in query', body: null };
