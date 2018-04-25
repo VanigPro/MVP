@@ -84,8 +84,8 @@ const createAsset = (txnModel, state) => {
           );
           return state.setState({
             [assetAddress]: encode({ asset, owner, isMessage:'listedItems', time }),
-            [assetAddressMfgSKU]: encode({ asset, owner, isMessage:'listedItemsMfg', time })
-            [assetAddressMfg]: encode({ asset, owner, isMessage:'Mfg', time })
+            [assetAddressMfgSKU]: encode({ asset, owner, isMessage:'listedItemsMfg', time }),
+            [assetAddressMfg]: encode({ asset, owner, isMessage:'Mfg', time }),
             [assetAddressSKU]: encode({ asset, owner, isMessage:'SKU', time })
           });
         } else {
