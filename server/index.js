@@ -57,6 +57,154 @@ router.get('/get_portal', function(req, res) {
   res.status(200).send(resObj);
 });
 
+router.get('/get_mfg_list', function(req, res) {
+  let userAddr = '';
+  let tabname = 'listeditems';
+
+  //userAddr = '7d7f7705';
+  userAddr = tabAddressGenerate['Mfg'](PREFIX);
+  let asset = {};
+  let tmpObj = {};
+  let items = [];
+  let parsed = {};
+
+  try {
+    const url = API_URL + '/state?address=' + userAddr;
+    request.get(url, function(error, response, body) {
+      let resObj;
+      if (error) {
+        console.error(error);
+        resObj = { error: error, body: null };
+      } else {
+        //check if json
+        try {
+          parsed = JSON.parse(body);
+        } catch (error) {
+          resObj = { error: error, body: null };
+          res.status(200).send(resObj);
+        }
+
+        console.log(parsed.data.length);
+        if (parsed.data.length) {
+          parsed.data.forEach(payloadObj => {
+            asset = JSON.parse(atob(payloadObj.data));
+            tmpObj = JSON.parse(asset.asset);
+            tmpObj['owner'] = asset.owner;
+            items.push(tmpObj);
+          });
+        }
+      }
+      //console.log(resObj);
+      res.status(200).send(items);
+    });
+  } catch (error) {
+    resObj = { error: error, body: null };
+    res.status(200).send(resObj);
+  }
+});
+
+router.get('/get_sku_item', function(req, res) {
+  let userAddr = '';
+  let tabname = 'listeditems';
+  var SKU = req.query ? req.query.SKU : null; // $_GET["id"]
+
+  if (SKU === null) {
+    resObj = { error: 'Need SKU in query', body: null };
+    res.status(200).send(resObj);
+  }
+  //userAddr = '7d7f7705'; //
+  userAddr = tabAddressGenerate['SKU'](PREFIX, SKU);
+  let asset = {};
+  let tmpObj = {};
+  let items = [];
+  let parsed = {};
+
+  try {
+    const url = API_URL + '/state?address=' + userAddr;
+    request.get(url, function(error, response, body) {
+      let resObj;
+      if (error) {
+        console.error(error);
+        resObj = { error: error, body: null };
+      } else {
+        //check if json
+        try {
+          parsed = JSON.parse(body);
+        } catch (error) {
+          resObj = { error: error, body: null };
+          res.status(200).send(resObj);
+        }
+
+        console.log(parsed.data.length);
+        if (parsed.data.length) {
+          parsed.data.forEach(payloadObj => {
+            asset = JSON.parse(atob(payloadObj.data));
+            tmpObj = JSON.parse(asset.asset);
+            tmpObj['owner'] = asset.owner;
+            items.push(tmpObj);
+          });
+        }
+      }
+      //console.log(resObj);
+      res.status(200).send(items);
+    });
+  } catch (error) {
+    resObj = { error: error, body: null };
+    res.status(200).send(resObj);
+  }
+});
+
+router.get('/get_mfg_items_list', function(req, res) {
+  let userAddr = '';
+  let tabname = 'listeditems';
+  var mgg = req.query ? req.query.mfg : null; // $_GET["id"]
+
+  if (mfg === null) {
+    resObj = { error: 'Need Manufacturer (mfg) in query', body: null };
+    res.status(200).send(resObj);
+  }
+  //userAddr = '7d7f7705'; //
+  userAddr = tabAddressGenerate['listedItemsMfg'](PREFIX, mfg);
+  let asset = {};
+  let tmpObj = {};
+  let items = [];
+  let parsed = {};
+
+  try {
+    const url = API_URL + '/state?address=' + userAddr;
+    request.get(url, function(error, response, body) {
+      let resObj;
+      if (error) {
+        console.error(error);
+        resObj = { error: error, body: null };
+      } else {
+        //check if json
+        try {
+          parsed = JSON.parse(body);
+        } catch (error) {
+          resObj = { error: error, body: null };
+          res.status(200).send(resObj);
+        }
+
+        console.log(parsed.data.length);
+        if (parsed.data.length) {
+          parsed.data.forEach(payloadObj => {
+            asset = JSON.parse(atob(payloadObj.data));
+            tmpObj = JSON.parse(asset.asset);
+            tmpObj['owner'] = asset.owner;
+            items.push(tmpObj);
+          });
+        }
+      }
+      //console.log(resObj);
+      res.status(200).send(items);
+    });
+  } catch (error) {
+    resObj = { error: error, body: null };
+    res.status(200).send(resObj);
+  }
+});
+
 //get list of items with owner
 router.get('/get_item_list', function(req, res) {
   let userAddr = '';
