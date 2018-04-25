@@ -8,6 +8,7 @@ const {
 const { TransactionHeader } = require('sawtooth-sdk/protobuf');
 
 const { Transaction } = require('./models');
+
 const {
   getAddress,
   tabAddressGenerate

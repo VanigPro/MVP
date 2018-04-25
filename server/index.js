@@ -62,6 +62,7 @@ router.get('/get_portal', function(req, res) {
 router.get('/get_item_list', function(req, res) {
   let userAddr = '';
   let tabname = 'listeditems';
+  
   userAddr = '7d7f7702';//tabAddressGenerate[tabname](PREFIX, app.user.public,'');
   //userAddr = tabAddressGenerate[tabname](PREFIX, app.user.public,'');
 

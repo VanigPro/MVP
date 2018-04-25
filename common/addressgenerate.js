@@ -53,7 +53,6 @@ const tabAddressGenerate = {
     );
   }
 };
-
 module.exports = {
   getAddress,
   tabAddressGenerate
