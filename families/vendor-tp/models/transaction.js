@@ -16,6 +16,18 @@ Transaction.prototype = {
     if (!attrs.asset) {
       this.errors.push('Asset is required');
     }
+    else {
+        let assetjson = JSON.parse(asset);
+        if (!assetjson.SKU)
+        {
+            this.errors.push('SKU is required in asset');
+        }
+
+        if (!assetjson.Manufacturer)
+        {
+            this.errors.push('Manufacturer is required in asset');
+        }
+    }
 
     if (!attrs.owner) {
       this.errors.push('Owner is required');
