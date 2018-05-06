@@ -65,7 +65,7 @@ const createAsset = (txnModel, state) => {
         if (tabAddressGenerate[isMessage]) {
           let assetjson = JSON.parse(asset);
 
-        const address = tabAddressGenerate['listedItems'](
+        const address = tabAddressGenerate['SKU'](
                     PREFIX,
                     assetjson.SKU
                   );
