@@ -59,10 +59,20 @@ const createAsset = (txnModel, state) => {
           [address]: encode({ asset, owner, isMessage: 'vendorUser', time })
         });
       }
-    } else {
+    } else if (isMessage === 'listedItems') {
       if (entry && entry.length > 0) {
+
         if (tabAddressGenerate[isMessage]) {
           let assetjson = JSON.parse(asset);
+
+        const address = tabAddressGenerate['listedItems'](
+                    PREFIX,
+                    assetjson.SKU
+                  );
+            const entrySKU = entries[address];
+                    if (entrySKU && entrySKU.length > 0) {
+                      console.log(entry);
+                    }
 
           const assetAddress = tabAddressGenerate['listedItems'](
             PREFIX,

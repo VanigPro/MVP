@@ -4,6 +4,10 @@ function Transaction(attrs = {}) {
 	this.attrs = attrs;
 }
 
+function isNullOrWhiteSpace(str) {
+  return (!str || str.length === 0 || /^\s*$/.test(str))
+}
+
 Transaction.prototype = {
 	errors: [],
 	isValid(isAppointMent) {
@@ -18,17 +22,17 @@ Transaction.prototype = {
 		} else {
 			if (attrs.isMessage && attrs.isMessage !== "vendorUser") {
 				let assetjson = JSON.parse(attrs.asset);
-				if (!assetjson.SKU) {
+				if (!isNullOrWhiteSpace(assetjson.SKU)) {
 					this.errors.push("SKU is required in asset");
 				}
 
-				if (!assetjson.Manufacturer) {
+				if (!isNullOrWhiteSpace(assetjson.Manufacturer)) {
 					this.errors.push("Manufacturer is required in asset");
 				}
 			}
 		}
 
-		if (!attrs.owner) {
+		if (!isNullOrWhiteSpace(attrs.owner)) {
 			this.errors.push("Owner is required");
 		}
 
