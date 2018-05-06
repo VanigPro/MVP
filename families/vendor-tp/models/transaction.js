@@ -22,17 +22,17 @@ Transaction.prototype = {
 		} else {
 			if (attrs.isMessage && attrs.isMessage !== "vendorUser") {
 				let assetjson = JSON.parse(attrs.asset);
-				if (!isNullOrWhiteSpace(assetjson.SKU)) {
+				if (isNullOrWhiteSpace(assetjson.SKU)) {
 					this.errors.push("SKU is required in asset");
 				}
 
-				if (!isNullOrWhiteSpace(assetjson.Manufacturer)) {
+				if (isNullOrWhiteSpace(assetjson.Manufacturer)) {
 					this.errors.push("Manufacturer is required in asset");
 				}
 			}
 		}
 
-		if (!isNullOrWhiteSpace(attrs.owner)) {
+		if (isNullOrWhiteSpace(attrs.owner)) {
 			this.errors.push("Owner is required");
 		}
 
