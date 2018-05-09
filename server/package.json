@@ -12,7 +12,8 @@
     "start": "node .",
     "vendor": "nodemon -r dotenv/config . dotenv_config_path=./.env.vendor",
     "vendor1": "nodemon -r dotenv/config . dotenv_config_path=./.env.vendor1",
-    "customer": "nodemon -r dotenv/config . dotenv_config_path=./.env.customer ",
+    "customer":
+      "nodemon -r dotenv/config . dotenv_config_path=./.env.customer ",
     "inspect": "node --inspect ."
   },
   "repository": {
@@ -21,6 +22,7 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
+    "civic-sip-api": "^1.0.1",
     "cbor": "^3.0.0",
     "cors": "^2.8.4",
     "dotenv": "^4.0.0",

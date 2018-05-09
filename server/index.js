@@ -3,6 +3,7 @@
 require('dotenv').config({ silent: true });
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const civicSip = require('civic-sip-api');
 const { API_URL, ETHEREUM_API_KEY } = require('./../config');
 
 const { getBatchBytes } = require('./transaction');
@@ -38,6 +39,29 @@ router.use(bodyParser.urlencoded({ extended: true }));
 app.use('/', express.static(path.join(__dirname, '../vendorWeb')));
 app.use('/customer', express.static(path.join(__dirname, '../clientWeb')));
 app.use('/product', express.static(path.join(__dirname, '../product')));
+
+//Initialize civic instance passing your appId and secret.
+const civicClient = civicSip.newClient({
+  appId: 'rJjZu0eCG',
+  prvKey: '1e58f1057e5131d2705aec00e587cf32a9c46f547f9cead13203dc437733e915',
+  appSecret: '869f2bc404d4c84180c58f0fcdba2665'
+});
+
+router.post('/api/authenticate', function(req, res) {
+  const jwtToken = req.body.token;
+  let resObj = '';
+  civicClient
+    .exchangeCode(jwtToken)
+    .then(userData => {
+      console.log('userData = ', JSON.stringify(userData, null, 4));
+      resObj = { error: false, body: userData };
+      res.status(200).send(resObj);
+    })
+    .catch(error => {
+      resObj = { error: error, body: null };
+      res.status(200).send(resObj);
+    });
+});
 
 router.get('/server_time', function(req, res) {
   const currentDate = new Date();

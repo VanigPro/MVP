@@ -481,6 +481,25 @@ const submitPaymentToHyperLedger = (amount, senderAddr) => {
   app.update([payLoadObj], 'payment');
 };
 
+const { initCivic } = require('./civic');
+  initCivic(result => {
+    let name = '';
+    for (var key in result.data) {
+      let label = result.data[key].label;
+      if (label === 'contact.personal.email') {
+        name = result.data[key].value;
+      }
+    }
+    let credentialsObj = {
+      publicKey: result.userId,
+      name: name,
+      avatar: ''
+    };
+    storeDatatoStorage(credentialsObj);
+    login(createRoleBasedUser);
+  });
+};
+
 const uport = new Connect('Vanig', {
   clientId: '2odgjwjGBwB92GfBB38d378wg2fNiLe1A3P',
   network: 'rinkeby',
