@@ -39,6 +39,10 @@ router.use(bodyParser.urlencoded({ extended: true }));
 app.use('/', express.static(path.join(__dirname, '../vendorWeb')));
 app.use('/customer', express.static(path.join(__dirname, '../clientWeb')));
 app.use('/product', express.static(path.join(__dirname, '../product')));
+app.use(
+  '/staticPayment',
+  express.static(path.join(__dirname, '../staticPayment'))
+);
 
 //Initialize civic instance passing your appId and secret.
 const civicClient = civicSip.newClient({
