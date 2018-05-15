@@ -1,148 +1,136 @@
-* {
-	font-family: Arial, Helvetica, sans-serif;
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+ * {
+     font-family: 'Poppins', sans-serif;
+     color: #515286;
 }
-.frmcls {
-	margin:10px auto;
-	max-width: 400px;
-	padding: 20px 12px 10px 20px;
-	font-size: 13px;
+ .frmcls {
+     margin:10px auto;
+     max-width: 400px;
+     padding: 20px 12px 10px 20px;
+     font-size: 13px;
 }
-.frmcls li {
-	padding: 0;
-	display: block;
-	list-style: none;
-	margin: 10px 0 0 0;
+ .frmcls li {
+     padding: 0;
+     display: block;
+     list-style: none;
+     margin: 10px 0 0 0;
 }
-.frmcls label{
-	margin:0 0 3px 0;
-	padding:0px;
-	display:block;
-	font-weight: bold;
+ .frmcls label{
+     margin:0 0 3px 0;
+     padding:0px;
+     display:block;
+     font-weight: 600;
+     font-size: 14px;
+     padding-top: 10px;
+     padding-bottom: 5px;
 }
-.frmcls input[type=text], 
-.frmcls input[type=date],
-.frmcls input[type=datetime],
-.frmcls input[type=number],
-.frmcls input[type=search],
-.frmcls input[type=time],
-.frmcls input[type=url],
-.frmcls input[type=email],
-textarea, 
-select{
-	box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	border:1px solid #BEBEBE;
-	padding: 7px;
-	margin:0px;
-	-webkit-transition: all 0.30s ease-in-out;
-	-moz-transition: all 0.30s ease-in-out;
-	-ms-transition: all 0.30s ease-in-out;
-	-o-transition: all 0.30s ease-in-out;
-	outline: none;	
+ .frmcls input[type=text], .frmcls input[type=date], .frmcls input[type=datetime], .frmcls input[type=number], .frmcls input[type=search], .frmcls input[type=time], .frmcls input[type=url], .frmcls input[type=email], textarea, select{
+     box-sizing: border-box;
+     -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+     background-color: transparent;
+     color: #262768;
+     height: 46px;
+     border: 1px solid #e7e8f8;
+     padding: 0 15px;
+     border-radius: 4px;
+     width: 100%;
+     -webkit-transition: all 0.30s ease-in-out;
+     -moz-transition: all 0.30s ease-in-out;
+     -ms-transition: all 0.30s ease-in-out;
+     -o-transition: all 0.30s ease-in-out;
+     outline: none;
 }
-.frmcls input[type=text]:focus, 
-.frmcls input[type=date]:focus,
-.frmcls input[type=datetime]:focus,
-.frmcls input[type=number]:focus,
-.frmcls input[type=search]:focus,
-.frmcls input[type=time]:focus,
-.frmcls input[type=url]:focus,
-.frmcls input[type=email]:focus,
-.frmcls textarea:focus, 
-.frmcls select:focus{
-	-moz-box-shadow: 0 0 8px #88D5E9;
-	-webkit-box-shadow: 0 0 8px #88D5E9;
-	box-shadow: 0 0 8px #88D5E9;
-	border: 1px solid #88D5E9;
+ .frmcls input[type=text]:focus, .frmcls input[type=date]:focus, .frmcls input[type=datetime]:focus, .frmcls input[type=number]:focus, .frmcls input[type=search]:focus, .frmcls input[type=time]:focus, .frmcls input[type=url]:focus, .frmcls input[type=email]:focus, .frmcls textarea:focus, .frmcls select:focus{
+     border: 1px solid #515286;
 }
-.frmcls .field-divided{
-	width: 49%;
+ .frmcls .field-divided{
+     width: 49% !important;
 }
-
-.frmcls .field-long{
-	width: 100%;
+ .frmcls .field-long{
+     width: 100%;
 }
-.frmcls .field-select{
-	width: 100%;
+ .frmcls .field-select{
+     width: 100%;
 }
-.frmcls .field-textarea{
-	height: 100px;
+ .frmcls .field-textarea{
+     height: 100px;
 }
-.frmcls input[type=submit], .frmcls input[type=button]{
-	background: #4B99AD;
-	padding: 8px 15px 8px 15px;
-	border: none;
-	color: #fff;
+ .frmcls input[type=submit], .frmcls input[type=button]{
+     background-color: #505bcf;
+     background-image: linear-gradient(90deg, #505bcf 1%, #628ce7 64%, #73bdfe 100%);
+     padding: 15px 35px;
+     font-size: 14px;
+     text-transform: uppercase;
+     color: #fff;
+     display: inline-block;
+     border-radius: 4px;
+     border: 0;
+     cursor: pointer transition: 0.5s ease;
 }
-.frmcls input[type=submit]:hover, .frmcls input[type=button]:hover{
-	background: #4691A4;
-	box-shadow:none;
-	-moz-box-shadow:none;
-	-webkit-box-shadow:none;
+ .frmcls input[type=submit]:hover, .frmcls input[type=button]:hover{
+     background: #505bcf;
 }
-.frmcls .required{
-	color:red;
+ .frmcls .required{
+     color:red;
 }
-
-.success {
-	color:#00C851;
-	font-weight:normal !important;
+ .success {
+     color:#00C851;
+     font-weight:normal !important;
 }
-
-.error {
-	color:#ff4444;
-	font-weight:normal !important;
+ .error {
+     color:#ff4444;
+     font-weight:normal !important;
 }
-
-#showData table{
-    border-collapse: collapse;
-    width: 100%;
-	font-size: 12px;
+ #showData table{
+     border-collapse: collapse;
+     width: 100%;
+     font-size: 12px;
 }
-
-#showData table td, #showData table th {
-    border: 1px solid #ddd;
-    padding: 8px;
+ #showData table td, #showData table th {
+     padding: 8px;
 }
-
-#showData table tr:nth-child(even){background-color: #f2f2f2;}
-
-#showData table tr:hover {background-color: #ddd;}
-
-#showData tableth {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: left;
-    background-color: #4CAF50;
-    color: white;
+ #showData table tr:nth-child(even){
+    background-color: #f6f7fd;
 }
-
-
-.menu {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    width: 20%;
-    background-color: #f1f1f1;
-    position: fixed;
-    height: 100%;
-    overflow: auto;
+ #showData table tr:hover {
+    background-color: #ddd;
 }
-
-.menu li a {
-    display: block;
-    color: #000;
-    padding: 8px 16px;
-    text-decoration: none;
+ .menu {
+     list-style-type: none;
+     margin: 0;
+     padding: 0;
+     width: 235px;
+     background-color: #f6f7fd;
+     position: fixed;
+     height: 100%;
+     overflow: auto;
+     left: 0;
+     top: 0;
 }
-
-.menu li a.active {
-    background-color: #4CAF50;
-    color: white;
+ .menu li a {
+     display: block;
+     padding: 8px 16px;
+     text-decoration: none;
 }
-
-.menu li a:hover:not(.active) {
-    background-color: #555;
-    color: white;
+ .menu li a.active {
+     background-color: #505bcf;
+     color: white;
+}
+ .menu li a:hover:not(.active) {
+     background-color: #515286;
+     color: white;
+}
+ #showData th {
+     background-color: #515286;
+     color: #fff;
+     vertical-align: middle;
+     text-align: left;
+     padding-left: 20px;
+     height: 46px;
+     font-weight: 400;
+}
+ #showData tr {
+     height: 50px;
+     font-size: 13px;
 }
