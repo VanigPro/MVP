@@ -93,52 +93,67 @@ const addEditIconForMobile = () => {
 */
 
 const getListedItemsHtml = (parent, asset) => {
-  var productlist =
-    '<br><div id="showData" class="well well-small">';
+  var productlist = '<br><div id="showData" class="well well-small">';
 
   var htmlTableData = '';
   console.log(asset);
   var i = 3;
   asset.forEach(item => {
-
     i++;
-    if(i > 9){
+    if (i > 9) {
       i = 1;
     }
     productlist += '<div class="row-fluid">';
-      productlist += '<div class="span2">';
-        productlist += '<img src="images/demo_img/SKUIMG00' + i +'.jpg" alt="">';
-      productlist += '</div>';
+    productlist += '<div class="span2">';
+    productlist += '<img src="images/demo_img/SKUIMG00' + i + '.jpg" alt="">';
+    productlist += '</div>';
 
-      productlist += '<div class="span6">';
-			   productlist += '<h5>' + item.Description +' </h5>';
-			productlist += '<p>';
-      productlist += '<div class="fifty"><span class="attr">SKU</span> ' + item.SKU + '<br>';
-      productlist += '<span class="attr">Item Number</span> ' + item.ItemNo + '<br>';
-      productlist += '<span class="attr">Color</span> ' + item.Color + '<br>';
-      productlist += '<span class="attr">Size</span> ' + item.Size + '<br></div>';
-      productlist += '<div class="fifty"><span class="attr">Mfg Location</span> ' + item.MfgLocation + '<br>';
-      productlist += '<span class="attr">Mfg Date</span> ' + item.MfgDate + '<br>';
-      productlist += '<span class="attr">Expiry Date</span> ' + item.ExpiryDate + '<br>';
-      productlist += '<span class="attr">Made Of</span> ' + item.MadeOf + '<br></div>';
+    productlist += '<div class="span6">';
+    productlist += '<h5>' + item.Description + ' </h5>';
+    productlist += '<p>';
+    productlist +=
+      '<div class="fifty"><span class="attr">SKU</span> ' + item.SKU + '<br>';
+    productlist +=
+      '<span class="attr">Item Number</span> ' + item.ItemNo + '<br>';
+    productlist += '<span class="attr">Color</span> ' + item.Color + '<br>';
+    productlist += '<span class="attr">Size</span> ' + item.Size + '<br></div>';
+    productlist +=
+      '<div class="fifty"><span class="attr">Mfg Location</span> ' +
+      item.MfgLocation +
+      '<br>';
+    productlist +=
+      '<span class="attr">Mfg Date</span> ' + item.MfgDate + '<br>';
+    productlist +=
+      '<span class="attr">Expiry Date</span> ' + item.ExpiryDate + '<br>';
+    productlist +=
+      '<span class="attr">Made Of</span> ' + item.MadeOf + '<br></div>';
 
-      productlist += '</p>';
-		productlist += '</div>';
-		productlist += '<div class="span4 alignR">';
-			//productlist += '<form class="form-horizontal qtyFrm">';
-				productlist += '<h3> <span class="attr">VANIG tokens</span> ' + item.Price + '</h3>';
-				productlist += '<span class="attr">Mfd. by</span> '+ item.Manufacturer + ' <br>';
-        if(item.MfgDate.trim() != ''){
-          productlist += '<span class="attr">on date</span> ' + item.MfgDate + '<br>';//'('+ item.MfgDate +')
-        }
-        productlist += '<div class="btn-group">';
-				  productlist += '<a href="#" class="defaultBtn" data-sku="'+ item.SKU +'" data-owner="'+ item.owner +'">Add to cart</a>';
-				 productlist += '</div>';
-			//productlist += '</form>';
-		productlist += '</div>';
+    productlist += '</p>';
+    productlist += '</div>';
+    productlist += '<div class="span4 alignR">';
+    //productlist += '<form class="form-horizontal qtyFrm">';
+    productlist +=
+      '<h3> <span class="attr">VANIG tokens</span> ' + item.Price + '</h3>';
+    productlist +=
+      '<span class="attr">Mfd. by</span> ' + item.Manufacturer + ' <br>';
+    if (item.MfgDate.trim() != '') {
+      productlist +=
+        '<span class="attr">on date</span> ' + item.MfgDate + '<br>'; //'('+ item.MfgDate +')
+    }
+    productlist += '<div class="btn-group">';
+    productlist +=
+      '<a href="#" class="defaultBtn" data-sku="' +
+      item.SKU +
+      '" data-mfgby="Manufacturer"' +
+      item.Manufacturer +
+      '" data-owner="' +
+      item.owner +
+      '">Add to cart</a>';
+    productlist += '</div>';
+    //productlist += '</form>';
+    productlist += '</div>';
 
     productlist += '</div><hr class="soften">';
-
   });
   $(parent).html(productlist);
 
