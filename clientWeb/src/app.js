@@ -67,7 +67,7 @@ jQuery(document.body).on('click', '.defaultBtn', function() {
     jQuery(this).attr('data-sku') +
     '", "OWNER":"' +
     jQuery(this).attr('data-owner') +
-    '", , "Manufacturer":"' +
+    '",  "Manufacturer":"' +
     jQuery(this).attr('data-mfgby') +
     '"}';
   var formData = JSON.parse(jsonString);
