@@ -8,11 +8,17 @@
 <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-<ul class="menu">
-  <li><a class="active" href="index.html">List Items</a></li>
-  <li><a href="additem.html">Add Item</a></li>
-</ul>
-<div style="margin-left:20%;padding:1px 16px;height:1000px;">
+<div class="menu">
+<div class="menu-container">
+	<h1  class="vanig-logo"><a href="index.html"><img src="images/vanig-logo.png" alt="Vanig"></a></h1>
+		<ul>
+		  <li><a class="active" href="index.html">List Items</a></li>
+		  <li><a href="additem.html">Add Item</a></li>
+		  <li><a href="https://vanig.io/mvp" class="visit-store">Visit Store</a></li>
+		</ul>
+</div>
+</div>
+<div class="showdata-container">
 
 <div id="showData">
 	Getting data through AJAX
@@ -38,6 +44,7 @@ $(function() {
 			}
 
 			var table = document.createElement("table");
+			
 
 			// CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
 
