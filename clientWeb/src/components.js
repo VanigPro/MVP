@@ -107,7 +107,7 @@ const getListedItemsHtml = (parent, asset) => {
     }
     productlist += '<div class="row-fluid">';
     productlist += '<div class="span2">';
-    productlist += '<img src="images/demo_img/SKUIMG00' + i + '.jpg" alt="">';
+    productlist += '<img src="http://mvp.vanig.io/uploads/product_image/product_' + i + '_1_thumb.jpg" alt="">';
     productlist += '</div>';
 
     productlist += '<div class="span6">';
