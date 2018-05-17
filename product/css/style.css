@@ -203,3 +203,12 @@ body {
     padding: 11px 24px !important;
     font-weight: 600;
 }
+
+
+.welcome-message {
+    text-align: center;
+}
+
+.welcome-message h3 {
+    font-size: 24px;
+}
