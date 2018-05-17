@@ -13,9 +13,38 @@ var tokenInstance,
   isUport = false,
   totalPaymentBalance = 0,
   totalTokenBalance = 0,
-  totalApprovalBalanceLeft = 0;
+  totalApprovalBalanceLeft = 0,
+  amountToPay = 0;
+
+function getUrlVars() {
+  var vars = {};
+  var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(
+    m,
+    key,
+    value
+  ) {
+    vars[key] = value;
+  });
+  return vars;
+}
+
+function getUrlParam(parameter, defaultvalue) {
+  var urlparameter = defaultvalue;
+  if (window.location.href.indexOf(parameter) > -1) {
+    urlparameter = getUrlVars()[parameter];
+  }
+  return urlparameter;
+}
 
 const pocfun = async uport => {
+  amountToPay = getUrlParam('amount', '1');
+  var tempStr = 'Pay ' + amountToPay + ' Vanig tokens to purchase items.';
+  $('.payTokenString').text(tempStr);
+
+  tempStr = 'Pay ' + amountToPay + ' Vanig tokens';
+  $('.payTokenBtnString').text(tempStr);
+
+  console.log(amountToPay);
   let Web3 = require('web3');
   // Checking if Web3 has been injected by the browser (Mist/MetaMask)
   if (typeof web3 !== 'undefined') {
@@ -96,9 +125,8 @@ const initContractMethod = async (callback, watchCallback, userCreatedTime) => {
 
   var isPaymentDone = false;
   const paymentEvent = await paymentInstance.LogPayment(
-    { sender: accounts[0]},
-    { fromBlock: 0, toBlock: 'latest'}
-
+    { sender: accounts[0] },
+    { fromBlock: 0, toBlock: 'latest' }
   );
 
   const latestBlock = await web3.eth.getBlockNumber();
@@ -168,9 +196,10 @@ const initContractMethod = async (callback, watchCallback, userCreatedTime) => {
     if (totalTokenBalance > 0) {
       addLoader(pocStepDiv, 'Please wait your payment request is in process');
       await paymentInstance
-        .pay(7,{ from: accounts[0]} )
+        .pay(amountToPay, { from: accounts[0] })
         .then(
           function(success) {
+            alertBox(' Order has been placed successfully.');
             isPaymentDone = true;
             updateTotalTokenBalance();
             getApprovalBalance();
@@ -180,6 +209,7 @@ const initContractMethod = async (callback, watchCallback, userCreatedTime) => {
             removeLoader(pocStepDiv);
           },
           function(fail) {
+            alertBox('Payment failed. Please do the process again.');
             removeLoader(pocStepDiv);
           }
         )

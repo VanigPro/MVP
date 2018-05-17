@@ -24,7 +24,9 @@ const getHeaderHtml = () => {
 				<div class="menu hide-on-desktops">\n\
 					<img src="../images/menu.svg" alt="menu icon">\n\
 				</div>\n\
+        <a href="http://mvp.vanig.io">\n\
 				<img src="../images/logo.webp" class="logo left" alt="vanig.io logo">\n\
+        </a>\n\
 				<div class="flex-container header-actions hide-on-phones">\n\
 					<a id="logout" class="logout" href="javascript:void(0);">Logout</a>\n\
 				</div>\n\
@@ -142,13 +144,19 @@ const getListedItemsHtml = (parent, asset) => {
     }
     productlist += '<div class="btn-group">';
     productlist +=
-      '<a href="#" class="defaultBtn" data-sku="' +
+      /*  '<a href="#" class="defaultBtn" data-sku="' +
       item.SKU +
       '" data-mfgby="Manufacturer"' +
       item.Manufacturer +
       '" data-owner="' +
       item.owner +
-      '">Add to cart</a>';
+      '">Add to cart</a>';*/
+      '<a href="dashboard.html' +
+      '?amount=' +
+      item.Price +
+      '" class="defaultBtn">' +
+      'Add to Cart </a>';
+
     productlist += '</div>';
     //productlist += '</form>';
     productlist += '</div>';
