@@ -354,7 +354,7 @@ app.update = function(payLoadArr, isMessage, $this) {
 };
 
 $(document).on('click', '#logout', function() {
-  sessionStorage.clear();
+  localStorage.clear();
   if (pagename === 'payment-page') {
     window.location.href = 'index.html';
   } else {
@@ -543,7 +543,7 @@ const storeDatatoStorage = credentials => {
     credentials.name,
     credentials.avatar
   );
-  sessionStorage.setItem('credentials', JSON.stringify(credentials));
+  localStorage.setItem('credentials', JSON.stringify(credentials));
 };
 
 const initloginClick = () => {
@@ -570,7 +570,7 @@ const initStartApp = result => {
   FAMILY = result.family;
   PREFIX = getAddress(FAMILY, 6);
 
-  var credentials = sessionStorage.getItem('credentials');
+  var credentials = localStorage.getItem('credentials');
   if (credentials !== null) {
     credentials = JSON.parse(credentials);
     app.user = makeKeyPair(
