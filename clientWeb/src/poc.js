@@ -56,7 +56,7 @@ const pocfun = async uport => {
     isUport = true;
     // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
     console.log('No web3? You should consider trying MetaMask!');
-    const uportData = JSON.parse(sessionStorage.getItem('credentials'));
+    const uportData = JSON.parse(localStorage.getItem('credentials'));
     if (uportData.address) {
       const mniddecode = mnid.decode(uportData.address);
       window.web3 = uport.getWeb3();
