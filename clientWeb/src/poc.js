@@ -16,6 +16,10 @@ var tokenInstance,
   totalApprovalBalanceLeft = 0,
   amountToPay = 0;
 
+function openInNewTab(url) {
+  var win = window.open(url);
+}
+
 function getUrlVars() {
   var vars = {};
   var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(
@@ -199,7 +203,24 @@ const initContractMethod = async (callback, watchCallback, userCreatedTime) => {
         .pay(amountToPay, { from: accounts[0] })
         .then(
           function(success) {
+            //  var link = document.createElement('a');
+            //  link.textContent = 'Click here to check your Token transcation';
+            //  link.href = 'https://rinkeby.etherscan.io/tx/' + success.tx;
+            //    document.getElementById('paymentTxnLink').appendChild(link);
+            var newDiv = document.getElementById('paymentTxnLink');
+            var urlLink = 'https://rinkeby.etherscan.io/tx/' + success.tx;
+            newDiv.textContent = 'Click here to check your Token transcation';
+            //newDiv.onClick = openInNewTab(urlLink);
+            newDiv.addEventListener(
+              'click',
+              function() {
+                openInNewTab(urlLink);
+              },
+              false
+            );
+
             alertBox(' Order has been placed successfully.');
+
             isPaymentDone = true;
             updateTotalTokenBalance();
             getApprovalBalance();
