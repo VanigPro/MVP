@@ -30,7 +30,7 @@ const getHeaderHtml = () => {
 </div>\n\
 <div class="welcome-message">\n\
  <h3>Item List from Hyperledger Sawtooth</h3>\n\
-</div>;
+</div>';
 };
 
 const getMainTabsHtml = () => {
