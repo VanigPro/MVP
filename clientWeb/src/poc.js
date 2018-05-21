@@ -100,7 +100,7 @@ const getApprovalBalance = async () => {
 };
 
 const updateTotalPaymentDone = balance => {
-  $('.total-amsys-payment').text(balance);
+  $('.total-payment').text(balance);
 };
 
 const updateTotalTokenBalance = async () => {
