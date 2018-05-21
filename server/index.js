@@ -37,7 +37,7 @@ const toInternalError = err => {
 
 router.use(bodyParser.urlencoded({ extended: true }));
 app.use('/', express.static(path.join(__dirname, '../vendorWeb')));
-app.use('/shop', express.static(path.join(__dirname, '../clientWeb')));
+app.use('/shop', express.static(path.join(__dirname, '../shop')));
 app.use('/ProductListing', express.static(path.join(__dirname, '../product')));
 app.use(
   '/staticPayment',
