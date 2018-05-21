@@ -302,6 +302,7 @@ input[type='checkbox']:checked + span.checkbox:after {
 .logo {
 	width: 145px;
     height: auto;
+    padding: 10px 0;
 }
 
 .logout {
@@ -1165,3 +1166,20 @@ hr.soften {
 	background: #505bcf;
 }
 
+.welcome-message {
+    padding: 40px 0;
+    text-align: center;
+    background: #fcfcfc;
+}
+
+
+.header-actions a {
+    margin-left: 40px;
+    color: #fff;
+    text-decoration: none;
+}
+
+.header-actions {
+    padding: 18px 0;
+    float: right;
+}
