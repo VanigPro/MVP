@@ -25,19 +25,16 @@ const getHeaderHtml = () => {
 					<img src="../images/menu.svg" alt="menu icon">\n\
 				</div>\n\
         <a href="http://mvp.vanig.io">\n\
-				<img src="../images/logo.webp" class="logo left" alt="vanig.io logo">\n\
+				<img src="../images/logo.png" class="logo left" alt="vanig.io logo">\n\
         </a>\n\
 				<div class="flex-container header-actions hide-on-phones">\n\
 					<a id="logout" class="logout" href="javascript:void(0);">Logout</a>\n\
 				</div>\n\
 			</div>\n\
 		</header>\n\
-		<section class="navigation">\n\
-			<div id="home-tabs" class="main-content flex-container">\n\
-      <a data-toggle="items-listed" class="active nav-li vendor-only" href="javascript:void(0);">Items Listed</a>\n\
-      <!--a data-toggle="add-new-item" class="nav-li vendor-only" href="javascript:void(0);">Add New Item</a-->\n\
-		</div>\n\
-	</section>\n\
+	<div class="welcome-message">\n\
+	    <h3>Item List from Hyperledger Sawtooth</h3>\n\
+        </div>\n\
 </div>';
 };
 
