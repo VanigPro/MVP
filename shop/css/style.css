@@ -23,7 +23,7 @@ body {
 
 header {
 	background-color: #3e4358;
-	background-image: url('/images/navbar-bg.jpg');
+	background-image: url('../Vanig.io Blockchain_files//navbar-bg.jpg');
 	background-size: cover;
 	padding: 0 20px;
 	overflow: hidden;
@@ -302,7 +302,6 @@ input[type='checkbox']:checked + span.checkbox:after {
 .logo {
 	width: 145px;
     height: auto;
-    padding: 10px 0;
 }
 
 .logout {
@@ -739,33 +738,66 @@ select {
 }
 
 .menu {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	width: 20%;
-	background-color: #f1f1f1;
-	position: fixed;
-	height: 100%;
-	overflow: auto;
+     list-style-type: none;
+     margin: 0;
+     padding: 0;
+     background-color: #505bcf;
+	 background-image: url('../images/navbar-bg.jpg');
+	 background-size: cover;
+	 background-repeat: no-repeat;
+	 overflow: hidden;
+}
+
+
+.menu ul {
+	list-style: none;
+	padding-left: 0;
+	display: inline-block;
+	float: right;
+	margin: 6px 0;
 }
 
 .menu li a {
-	display: block;
-	color: #000;
-	padding: 8px 16px;
-	text-decoration: none;
+	color: rgba(255, 255, 255, 0.6);
 }
 
-.menu li a.active {
-	background-color: #4caf50;
-	color: white;
+.menu li {
+	display: inline-block;
 }
 
-.menu li a:hover:not(.active) {
-	background-color: #555;
-	color: white;
+
+.menu-container {
+	width: 1170px;
+	max-width: 100%;
+	margin: 0 auto;
+}
+ .menu li a {
+     display: block;
+     padding: 8px 16px;
+     text-decoration: none;
+}
+ .menu li a.active {
+     position: relative;
+	 color: #fff;   
 }
 
+.menu li a.active:before {
+	content: ' ';
+	position: absolute;
+	width: 100%;
+	height: 4px;
+	background-color: #fff;
+	bottom: -16px;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	
+}
+
+
+ .menu li a:hover:not(.active) {
+     color: #fff;
+}
 
 /* for product list */
 
@@ -1166,20 +1198,18 @@ hr.soften {
 	background: #505bcf;
 }
 
+
+
 .welcome-message {
     padding: 40px 0;
     text-align: center;
     background: #fcfcfc;
 }
 
-
-.header-actions a {
-    margin-left: 40px;
-    color: #fff;
-    text-decoration: none;
+.welcome-message {
+    text-align: center;
 }
 
-.header-actions {
-    padding: 18px 0;
-    float: right;
+.welcome-message h3 {
+    font-size: 24px;
 }
