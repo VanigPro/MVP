@@ -18,24 +18,19 @@ const removeLoader = $this => {
 };
 
 const getHeaderHtml = () => {
-  return '<div class="fixed">\n\
-		<header>\n\
-			<div class="header-content flex-container flex-container--spacebetween header-right-div">\n\
-				<div class="menu hide-on-desktops">\n\
-					<img src="../images/menu.svg" alt="menu icon">\n\
-				</div>\n\
-        <a href="http://mvp.vanig.io">\n\
-				<img src="../images/logo.png" class="logo left" alt="vanig.io logo">\n\
-        </a>\n\
-				<div class="flex-container header-actions hide-on-phones">\n\
-					<a id="logout" class="logout" href="javascript:void(0);">Logout</a>\n\
-				</div>\n\
-			</div>\n\
-		</header>\n\
-	<div class="welcome-message">\n\
-	    <h3>Item List from Hyperledger Sawtooth</h3>\n\
-        </div>\n\
-</div>';
+  return '<div class="menu">\n\
+<div class="menu-container">\n\
+	<h1 class="vanig-logo"><a href="index.html"><img src="images/vanig-logo.png" alt="Vanig"></a></h1>\n\
+		<ul>\n\
+		  <li><a class="active" href="index.html">List Items</a></li>\n\
+		  <li><a href="dashboard.html">Payment Dashboard</a></li>\n\
+		  <li><a id="logout" class="logout visit-store" href="javascript:void(0);">Logout</a></li>\n\
+		</ul>\n\
+</div>\n\
+</div>\n\
+<div class="welcome-message">\n\
+ <h3>Item List from Hyperledger Sawtooth</h3>\n\
+</div>;
 };
 
 const getMainTabsHtml = () => {
