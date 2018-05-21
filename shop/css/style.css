@@ -23,7 +23,7 @@ body {
 
 header {
 	background-color: #3e4358;
-	background-image: url('../Vanig.io Blockchain_files//navbar-bg.jpg');
+	background-image: url('/images/navbar-bg.jpg');
 	background-size: cover;
 	padding: 0 20px;
 	overflow: hidden;
