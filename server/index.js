@@ -36,9 +36,12 @@ const toInternalError = err => {
 };
 
 router.use(bodyParser.urlencoded({ extended: true }));
-app.use('/', express.static(path.join(__dirname, '../vendorWeb')));
-app.use('/shop', express.static(path.join(__dirname, '../shop')));
-app.use('/ProductListing', express.static(path.join(__dirname, '../ProductListing')));
+app.use('/vendor', express.static(path.join(__dirname, '../vendor')));
+app.use('/', express.static(path.join(__dirname, '../')));
+app.use(
+  '/ProductListing',
+  express.static(path.join(__dirname, '../ProductListing'))
+);
 app.use(
   '/staticPayment',
   express.static(path.join(__dirname, '../staticPayment'))
@@ -290,13 +293,13 @@ const appObj = {
   vendorListItems: ''*/
 };
 
-//from vendorWeb/src/payload.js
+//from vendor/src/payload.js
 const payLoadEncrypt = (pubKey, privKey, payload, isMessage) => {
   payload = JSON.stringify(payload);
   return payload;
 };
 
-//from vendorWeb/src/app.js
+//from vendor/src/app.js
 const getPayLoadObj = (
   action,
   asset,
@@ -316,7 +319,7 @@ const getPayLoadObj = (
   };
 };
 
-//from vendorWeb/src/payload.js
+//from vendor/src/payload.js
 const calculatePayLoad = {
   vendorUser: (isTest, appObj) => {
     let asset = { name: appObj.user.name, isTest };
@@ -338,7 +341,7 @@ const calculatePayLoad = {
     return getPayLoadObj('create', asset, appObj, 'listedItems');
   }*/
 };
-//from vendorWeb/src/app.js
+//from vendor/src/app.js
 const userCreate = (isTest, cb) => {
   let isMessage = 'vendorUser';
   const payLoadObj = calculatePayLoad[isMessage](isTest, appObj);
